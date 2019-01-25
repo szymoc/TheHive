@@ -1,0 +1,40 @@
+{
+  "name": "css-spaces",
+  "description": "A simple CSS spacing library for margins, paddings and more",
+  "main": "dist/spaces.css",
+  "authors": [
+    "Jeremias Erbs <j@badabam.de>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "css",
+    "sass",
+    "margin",
+    "padding",
+    "width",
+    "styles",
+    "spacing",
+    "height",
+    "library",
+    "lib"
+  ],
+  "homepage": "http://badabam.github.io/css-spaces/",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "0.3.5",
+  "_release": "0.3.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.5",
+    "commit": "d686f62520f7d0681bee373af4b1e42c32d4a701"
+  },
+  "_source": "https://github.com/badabam/css-spaces.git",
+  "_target": "~0.3.5",
+  "_originalSource": "css-spaces"
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven" xmlns:e="http://ant.apache.org/ivy/extra">
+	<info organisation="org.elasticsearch.plugin"
+		module="x-pack-api"
+		revision="5.6.2"
+		status="release"
+		publication="20180515082440"
+	>
+		<license name="Elastic Commercial Software End User License Agreement" url="https://www.elastic.co/eula/" />
+		<description homepage="">
+		Elasticsearch Expanded Pack Plugin
+		</description>
+		<e:sbtTransformHash>9349ecdef979fe8ee8cb7909b82de8df1e60efce</e:sbtTransformHash>
+	</info>
+	<configurations>
+		<conf name="default" visibility="public" description="runtime dependencies and master artifact can be used with this conf" extends="runtime,master"/>
+		<conf name="master" visibility="public" description="contains only the artifact published by this module itself, with no transitive dependencies"/>
+		<conf name="compile" visibility="public" description="this is the default scope, used if none is specified. Compile dependencies are available in all classpaths."/>
+		<conf name="provided" visibility="public" description="this is much like compile, but indicates you expect the JDK or a container to provide it. It is only available on the compilation classpath, and is not transitive."/>
+		<conf name="runtime" visibility="public" description="this scope indicates that the dependency is not required for compilation, but is for execution. It is in the runtime and test classpaths, but not the compile classpath." extends="compile"/>
+		<conf name="test" visibility="private" description="this scope indicates that the dependency is not required for normal use of the application, and is only available for the test compilation and execution phases." extends="runtime"/>
+		<conf name="system" visibility="public" description="this scope is similar to provided except that you have to provide the JAR which contains it explicitly. The artifact is always available and is not looked up in a repository."/>
+		<conf name="sources" visibility="public" description="this configuration contains the source artifact of this module, if any."/>
+		<conf name="javadoc" visibility="public" description="this configuration contains the javadoc artifact of this module, if any."/>
+		<conf name="optional" visibility="public" description="contains all optional dependencies"/>
+	</configurations>
+	<publications>
+		<artifact name="x-pack-api" type="jar" ext="jar" conf="master"/>
+	</publications>
+	<dependencies>
+		<dependency org="org.elasticsearch.plugin" name="transport-netty3-client" rev="5.6.2" force="true" conf="runtime->compile(*),runtime(*),master(compile)"/>
+		<dependency org="org.elasticsearch.plugin" name="transport-netty4-client" rev="5.6.2" force="true" conf="runtime->compile(*),runtime(*),master(compile)"/>
+		<dependency org="com.unboundid" name="unboundid-ldapsdk" rev="3.2.0" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="org.bouncycastle" name="bcprov-jdk15on" rev="1.55" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="org.bouncycastle" name="bcpkix-jdk15on" rev="1.55" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)">
+			<exclude org="org.bouncycastle" module="bcprov-jdk15on" name="*" type="*" ext="*" conf="" matcher="exact"/>
+		</dependency>
+		<dependency org="com.googlecode.owasp-java-html-sanitizer" name="owasp-java-html-sanitizer" rev="r239" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)">
+			<exclude org="com.google.guava" module="guava" name="*" type="*" ext="*" conf="" matcher="exact"/>
+			<exclude org="com.google.code.findbugs" module="jsr305" name="*" type="*" ext="*" conf="" matcher="exact"/>
+			<exclude org="com.google.errorprone" module="error_prone_annotations" name="*" type="*" ext="*" conf="" matcher="exact"/>
+			<exclude org="com.google.j2objc" module="j2objc-annotations" name="*" type="*" ext="*" conf="" matcher="exact"/>
+			<exclude org="org.codehaus.mojo" module="animal-sniffer-annotations" name="*" type="*" ext="*" conf="" matcher="exact"/>
+		</dependency>
+		<dependency org="com.google.guava" name="guava" rev="16.0.1" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="com.sun.mail" name="javax.mail" rev="1.5.3" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)">
+			<exclude org="javax.activation" module="activation" name="*" type="*" ext="*" conf="" matcher="exact"/>
+		</dependency>
+		<dependency org="javax.activation" name="activation" rev="1.1" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="org.elasticsearch.client" name="elasticsearch-rest-client" rev="5.6.2" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="org.elasticsearch.client" name="elasticsearch-rest-client-sniffer" rev="5.6.2" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="net.sf.supercsv" name="super-csv" rev="2.4.0" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="org.elasticsearch" name="elasticsearch" rev="5.6.2" force="true" conf="provided->compile(*),provided(*),runtime(*),master(compile)"/>
+		<dependency org="org.locationtech.spatial4j" name="spatial4j" rev="0.6" force="true" conf="provided->compile(*),provided(*),runtime(*),master(compile)"/>
+		<dependency org="com.vividsolutions" name="jts" rev="1.13" force="true" conf="provided->compile(*),provided(*),runtime(*),master(compile)"/>
+		<dependency org="org.apache.logging.log4j" name="log4j-api" rev="2.9.1" force="true" conf="provided->compile(*),provided(*),runtime(*),master(compile)"/>
+		<dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.9.1" force="true" conf="provided->compile(*),provided(*),runtime(*),master(compile)">
+			<exclude org="org.apache.logging.log4j" module="log4j-api" name="*" type="*" ext="*" conf="" matcher="exact"/>
+		</dependency>
+		<dependency org="org.elasticsearch" name="jna" rev="4.4.0-1" force="true" conf="provided->compile(*),provided(*),runtime(*),master(compile)"/>
+	</dependencies>
+</ivy-module>
