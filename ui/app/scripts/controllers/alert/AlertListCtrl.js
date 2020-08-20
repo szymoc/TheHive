@@ -1,8 +1,12 @@
 (function() {
     'use strict';
     angular.module('theHiveControllers')
-        .controller('AlertListCtrl', function($scope, $q, $state, $uibModal, TagSrv, CaseTemplateSrv, AlertingSrv, NotificationSrv, FilteringSrv, CortexSrv, Severity) {
+        .controller('AlertListCtrl', function($rootScope, $scope, $q, $state, $uibModal, TagSrv, CaseTemplateSrv, ModalUtilsSrv, AlertingSrv, NotificationSrv, FilteringSrv, CortexSrv, Severity, VersionSrv) {
             var self = this;
+
+            self.urls = VersionSrv.mispUrls();
+
+            self.isAdmin = $scope.isAdmin($scope.currentUser);
 
             self.list = [];
             self.selection = [];
@@ -11,6 +15,7 @@
                 unfollow: false,
                 markAsRead: false,
                 markAsUnRead: false,
+                delete: false,
                 selectAll: false
             };
             self.filtering = new FilteringSrv('alert-section', {
@@ -77,6 +82,12 @@
                         type: 'string',
                         defaultValue: '',
                         label: 'Title'
+                    },
+                    sourceRef: {
+                        field: 'sourceRef',
+                        type: 'string',
+                        defaultValue: '',
+                        label: 'Reference'
                     },
                     date: {
                         field: 'date',
@@ -185,6 +196,24 @@
                 });
             };
 
+            self.bulkDelete = function() {
+
+              ModalUtilsSrv.confirm('Remove Alerts', 'Are you sure you want to delete the selected Alerts?', {
+                  okText: 'Yes, remove them',
+                  flavor: 'danger'
+              }).then(function() {
+                  var ids = _.pluck(self.selection, 'id');
+
+                  AlertingSrv.bulkRemove(ids)
+                      .then(function(/*response*/) {
+                          NotificationSrv.log('The selected events have been deleted', 'success');
+                      })
+                      .catch(function(response) {
+                          NotificationSrv.error('AlertListCtrl', response.data, response.status);
+                      });
+              });
+            };
+
             self.import = function(event) {
                 $uibModal.open({
                     templateUrl: 'views/partials/alert/event.dialog.html',
@@ -195,7 +224,9 @@
                         event: event,
                         templates: function() {
                             return CaseTemplateSrv.list();
-                        }
+                        },
+                        isAdmin: self.isAdmin,
+                        readonly: false
                     }
                 });
             };
@@ -221,7 +252,7 @@
                       self.responders = responders;
                   })
                   .catch(function(err) {
-                      NotificationSrv.error('AlertList', response.data, response.status);
+                      NotificationSrv.error('AlertList', err.data, err.status);
                   });
             };
 
@@ -264,9 +295,15 @@
 
                 temp = _.uniq(_.pluck(self.selection, 'status'));
 
-                self.menu.markAsRead = temp.indexOf('Ignores') === -1 && temp.indexOf('Imported') === -1;
+                self.menu.markAsRead = temp.indexOf('Ignored') === -1 && temp.indexOf('Imported') === -1;
                 self.menu.markAsUnread = temp.indexOf('New') === -1 && temp.indexOf('Updated') === -1;
 
+                self.menu.createNewCase = temp.indexOf('Imported') === -1;
+                self.menu.mergeInCase = temp.indexOf('Imported') === -1;
+
+                temp = _.without(_.uniq(_.pluck(self.selection, 'case')), null, undefined);
+
+                self.menu.delete = temp.length === 0;
             };
 
             self.select = function(event) {
@@ -296,6 +333,111 @@
 
                 self.updateMenu();
 
+            };
+
+            self.createNewCase = function() {
+                var alertIds = _.pluck(self.selection, 'id');
+
+                CaseTemplateSrv.list()
+                  .then(function(templates) {
+
+                      if(!templates || templates.length === 0) {
+                          return $q.resolve(undefined);
+                      }
+
+                      // Open template selection dialog
+                      var modal = $uibModal.open({
+                          templateUrl: 'views/partials/case/case.templates.selector.html',
+                          controller: 'CaseTemplatesDialogCtrl',
+                          controllerAs: 'dialog',
+                          size: 'lg',
+                          resolve: {
+                              templates: function(){
+                                  return templates;
+                              },
+                              uiSettings: ['UiSettingsSrv', function(UiSettingsSrv) {
+                                  return UiSettingsSrv.all();
+                              }]
+                          }
+                      });
+
+                      return modal.result;
+                  })
+                  .then(function(template) {
+
+                      // Open case creation dialog
+                      var modal = $uibModal.open({
+                          templateUrl: 'views/partials/case/case.creation.html',
+                          controller: 'CaseCreationCtrl',
+                          size: 'lg',
+                          resolve: {
+                              template: template
+                          }
+                      });
+
+                      return modal.result;
+                  })
+                  .then(function(createdCase) {
+                      // Bulk merge the selected alerts into the created case
+                      NotificationSrv.log('New case has been created', 'success');
+
+                      return AlertingSrv.bulkMergeInto(alertIds, createdCase.id);
+                  })
+                  .then(function(response) {
+                      if(alertIds.length === 1) {
+                          NotificationSrv.log(alertIds.length + ' Alert has been merged into the newly created case.', 'success');
+                      } else {
+                          NotificationSrv.log(alertIds.length + ' Alert(s) have been merged into the newly created case.', 'success');
+                      }
+
+                      $rootScope.$broadcast('alert:event-imported');
+
+                      $state.go('app.case.details', {
+                          caseId: response.data.id
+                      });
+                  })
+                  .catch(function(err) {
+                      if(err && !_.isString(err)) {
+                          NotificationSrv.error('AlertEventCtrl', err.data, err.status);
+                      }
+                  });
+
+            };
+
+            self.mergeInCase = function() {
+                var caseModal = $uibModal.open({
+                    templateUrl: 'views/partials/case/case.merge.html',
+                    controller: 'CaseMergeModalCtrl',
+                    controllerAs: 'dialog',
+                    size: 'lg',
+                    resolve: {
+                        source: function() {
+                            return self.event;
+                        },
+                        title: function() {
+                            return 'Merge selected Alert(s)';
+                        },
+                        prompt: function() {
+                            return 'the ' + self.selection.length + ' selected Alert(s)';
+                        }
+                    }
+                });
+
+                caseModal.result.then(function(selectedCase) {
+                    return AlertingSrv.bulkMergeInto(_.pluck(self.selection, 'id'), selectedCase.id);
+                })
+                .then(function(response) {
+                    $rootScope.$broadcast('alert:event-imported');
+
+                    $state.go('app.case.details', {
+                        caseId: response.data.id
+                    });
+                })
+                .catch(function(err) {
+                    if(err && !_.isString(err)) {
+                        NotificationSrv.error('AlertEventCtrl', err.data, err.status);
+                    }
+                });
             };
 
             this.filter = function () {
@@ -385,6 +527,14 @@
                     });
             };
 
+            this.filterByNewAndUpdated = function() {
+                self.filtering.clearFilters()
+                    .then(function(){
+                        self.addFilterValue('status', 'New');
+                        self.addFilterValue('status', 'Updated');
+                    });
+            };
+
             this.filterBySeverity = function(numericSev) {
                 self.addFilterValue('severity', Severity.values[numericSev]);
             };
@@ -395,10 +545,29 @@
                 self.filtering.setSort(sort);
             };
 
+            this.sortByField = function(field) {
+                var currentSort = Array.isArray(this.filtering.context.sort) ? this.filtering.context.sort[0] : this.filtering.context.sort;
+                var sort = null;
+
+                if(currentSort.substr(1) !== field) {
+                    sort = ['+' + field];
+                } else {
+                    sort = [(currentSort === '+' + field) ? '-'+field : '+'+field];
+                }
+
+                self.list.sort = sort;
+                self.list.update();
+                self.filtering.setSort(sort);
+            };
+
             this.getSeverities = self.filtering.getSeverities;
 
             this.getStatuses = function(query) {
                 return AlertingSrv.statuses(query);
+            };
+
+            this.getTypes = function(query) {
+                return AlertingSrv.types(query);
             };
 
             this.getSources = function(query) {

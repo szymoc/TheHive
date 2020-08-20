@@ -54,7 +54,6 @@ span.link-id {
 
 }
 
-
 .merge-dialog .merge-case {
     background-color: #f5f5f5;
     padding: 10px;
@@ -64,6 +63,10 @@ span.link-id {
 .merge-dialog .search-field ul.dropdown-menu {
     width: 100%;
     left: 0 !important;
+}
+
+.merge-dialog .search-field .input-group-addon {
+    line-height: 1;
 }
 
 .tags-list,
@@ -76,4 +79,14 @@ table.case-list .case-tags .label,
 .tags-list .label  {
     font-size: 12px !important;
     font-weight: normal;
+}
+
+pre.error-trace {
+  color: #a94442;
+  border: none;
+  font-size: 10px;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-wrap;
+  background-color: #f9f1f1;
 }

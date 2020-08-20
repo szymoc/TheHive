@@ -9,7 +9,7 @@ angular.module('theHiveControllers').controller('RootCtrl',
             $state.go('maintenance');
             return;
         }else if(!currentUser || !currentUser.id) {
-            $state.go('login', {autoLogin: appConfig.config.ssoAutoLogin });
+            $state.go('login');
             return;
         }
 
@@ -56,11 +56,17 @@ angular.module('theHiveControllers').controller('RootCtrl',
             scope: $scope,
             rootId: 'any',
             query: {
-                '_and': [{
-                    'status': 'InProgress'
-                }, {
-                    'owner': $scope.currentUser.id
-                }]
+                '_and': [
+                    {
+                        '_in': {
+                            '_field': 'status',
+                            '_values': ['Waiting', 'InProgress']
+                        }
+                    },
+                    {
+                        'owner': $scope.currentUser.id
+                    }
+                ]
             },
             result: {},
             objectType: 'case_task',
@@ -135,20 +141,53 @@ angular.module('theHiveControllers').controller('RootCtrl',
 
         $scope.logout = function() {
             AuthenticationSrv.logout(function() {
-                $state.go('login');
+                $state.go('login', {disableSsoAutoLogin: true});
             }, function(data, status) {
                 NotificationSrv.error('RootCtrl', data, status);
             });
         };
 
         $scope.createNewCase = function(template) {
-            $uibModal.open({
+            var modal = $uibModal.open({
                 templateUrl: 'views/partials/case/case.creation.html',
                 controller: 'CaseCreationCtrl',
                 size: 'lg',
                 resolve: {
                     template: template
                 }
+            });
+
+            modal.result
+                .then(function(data) {
+                    $state.go('app.case.details', {
+                        caseId: data.id
+                    });
+                })
+                .catch(function(err) {
+                    if(err && !_.isString(err)) {
+                        NotificationSrv.error('CaseCreationCtrl', err.data, err.status);
+                    }
+                });
+        };
+
+        $scope.openTemplateSelector = function() {
+            var modal = $uibModal.open({
+                templateUrl: 'views/partials/case/case.templates.selector.html',
+                controller: 'CaseTemplatesDialogCtrl',
+                controllerAs: 'dialog',
+                size: 'lg',
+                resolve: {
+                    templates: function(){
+                        return $scope.templates;
+                    },
+                    uiSettings: ['UiSettingsSrv', function(UiSettingsSrv) {
+                        return UiSettingsSrv.all();
+                    }]
+                }
+            });
+
+            modal.result.then(function(template) {
+                $scope.createNewCase(template);
             });
         };
 

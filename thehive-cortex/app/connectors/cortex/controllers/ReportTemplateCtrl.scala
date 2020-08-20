@@ -1,32 +1,29 @@
 package connectors.cortex.controllers
 
-import javax.inject.{ Inject, Singleton }
+import akka.stream.Materializer
+import akka.stream.scaladsl.Sink
+import connectors.cortex.services.ReportTemplateSrv
+import javax.inject.{Inject, Singleton}
+import models.Roles
+import net.lingala.zip4j.ZipFile
+import net.lingala.zip4j.model.FileHeader
+import org.elastic4play.controllers._
+import org.elastic4play.models.JsonFormat.baseModelEntityWrites
+import org.elastic4play.services.JsonFormat.queryReads
+import org.elastic4play.services.{AuxSrv, QueryDSL, QueryDef}
+import org.elastic4play.{BadRequestError, Timed}
+import play.api.Logger
+import play.api.http.Status
+import play.api.libs.json.{JsBoolean, JsFalse, JsObject, JsTrue}
+import play.api.mvc._
 
 import scala.collection.JavaConverters._
-import scala.concurrent.{ ExecutionContext, Future }
+import scala.concurrent.{ExecutionContext, Future}
 import scala.io.Source
 import scala.util.control.NonFatal
 
-import akka.stream.Materializer
-import akka.stream.scaladsl.Sink
-import play.api.Logger
-import play.api.http.Status
-import play.api.libs.json.{ JsBoolean, JsFalse, JsObject, JsTrue }
-import play.api.mvc._
-
-import org.elastic4play.{ BadRequestError, Timed }
-import org.elastic4play.controllers._
-import org.elastic4play.models.JsonFormat.baseModelEntityWrites
-import org.elastic4play.services.{ QueryDSL, QueryDef }
-import org.elastic4play.services.AuxSrv
-import org.elastic4play.services.JsonFormat.queryReads
-import connectors.cortex.services.ReportTemplateSrv
-import models.Roles
-import net.lingala.zip4j.core.ZipFile
-import net.lingala.zip4j.model.FileHeader
-
 @Singleton
-class ReportTemplateCtrl @Inject() (
+class ReportTemplateCtrl @Inject()(
     reportTemplateSrv: ReportTemplateSrv,
     auxSrv: AuxSrv,
     authenticated: Authenticated,
@@ -34,24 +31,28 @@ class ReportTemplateCtrl @Inject() (
     fieldsBodyParser: FieldsBodyParser,
     components: ControllerComponents,
     implicit val ec: ExecutionContext,
-    implicit val mat: Materializer) extends AbstractController(components) with Status {
+    implicit val mat: Materializer
+) extends AbstractController(components)
+    with Status {
 
   private[ReportTemplateCtrl] lazy val logger = Logger(getClass)
 
   @Timed
   def create: Action[Fields] = authenticated(Roles.admin).async(fieldsBodyParser) { implicit request ⇒
-    reportTemplateSrv.create(request.body)
+    reportTemplateSrv
+      .create(request.body)
       .map(reportTemplate ⇒ renderer.toOutput(CREATED, reportTemplate))
   }
 
   @Timed
-  def get(id: String): Action[AnyContent] = authenticated(Roles.read).async { implicit request ⇒
-    reportTemplateSrv.get(id)
+  def get(id: String): Action[AnyContent] = authenticated(Roles.read).async { _ ⇒
+    reportTemplateSrv
+      .get(id)
       .map(reportTemplate ⇒ renderer.toOutput(OK, reportTemplate))
   }
 
   @Timed
-  def getContent(analyzerId: String, reportType: String): Action[AnyContent] = authenticated(Roles.read).async { implicit request ⇒
+  def getContent(analyzerId: String, reportType: String): Action[AnyContent] = authenticated(Roles.read).async { _ ⇒
     import org.elastic4play.services.QueryDSL._
     val (reportTemplates, total) = reportTemplateSrv.find(and("analyzerId" ~= analyzerId, "reportType" ~= reportType), Some("0-1"), Nil)
     total.foreach { t ⇒
@@ -67,22 +68,24 @@ class ReportTemplateCtrl @Inject() (
 
   @Timed
   def update(id: String): Action[Fields] = authenticated(Roles.admin).async(fieldsBodyParser) { implicit request ⇒
-    reportTemplateSrv.update(id, request.body)
+    reportTemplateSrv
+      .update(id, request.body)
       .map(reportTemplate ⇒ renderer.toOutput(OK, reportTemplate))
   }
 
   @Timed
   def delete(id: String): Action[AnyContent] = authenticated(Roles.admin).async { implicit request ⇒
-    reportTemplateSrv.delete(id)
+    reportTemplateSrv
+      .delete(id)
       .map(_ ⇒ NoContent)
   }
 
   @Timed
   def find: Action[Fields] = authenticated(Roles.read).async(fieldsBodyParser) { implicit request ⇒
-    val query = request.body.getValue("query").fold[QueryDef](QueryDSL.any)(_.as[QueryDef])
-    val range = request.body.getString("range")
-    val sort = request.body.getStrings("sort").getOrElse(Nil)
-    val nparent = request.body.getLong("nparent").getOrElse(0L).toInt
+    val query     = request.body.getValue("query").fold[QueryDef](QueryDSL.any)(_.as[QueryDef])
+    val range     = request.body.getString("range")
+    val sort      = request.body.getStrings("sort").getOrElse(Nil)
+    val nparent   = request.body.getLong("nparent").getOrElse(0L).toInt
     val withStats = request.body.getBoolean("nstats").getOrElse(false)
 
     val (reportTemplates, total) = reportTemplateSrv.find(query, range, sort)
@@ -99,17 +102,19 @@ class ReportTemplateCtrl @Inject() (
     val importedReportTemplates: Seq[Future[(String, JsBoolean)]] = zipFile.getFileHeaders.asScala.filter(_ != null).collect {
       case fileHeader: FileHeader if !fileHeader.isDirectory ⇒
         val Array(analyzerId, reportTypeHtml, _*) = (fileHeader.getFileName + "/").split("/", 3)
-        val inputStream = zipFile.getInputStream(fileHeader)
-        val content = Source.fromInputStream(inputStream).mkString
+        val inputStream                           = zipFile.getInputStream(fileHeader)
+        val content                               = Source.fromInputStream(inputStream).mkString
         inputStream.close()
 
         val reportType = if (reportTypeHtml.endsWith(".html")) reportTypeHtml.dropRight(5) else reportTypeHtml
 
-        val reportTemplateFields = Fields.empty
+        val reportTemplateFields = Fields
+          .empty
           .set("reportType", reportType)
           .set("analyzerId", analyzerId)
           .set("content", content)
-        reportTemplateSrv.create(reportTemplateFields)
+        reportTemplateSrv
+          .create(reportTemplateFields)
           .recoverWith { // if creation fails, try to update
             case NonFatal(_) ⇒
               val reportTemplateId = analyzerId + "_" + reportType

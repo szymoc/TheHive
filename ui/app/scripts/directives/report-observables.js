@@ -67,13 +67,56 @@
                         return item.selected === true;
                     }), 'dataType');
 
-                    var message = [
-                        '### Discovered from:',
-                        '- Observable: **['+ $scope.origin.dataType + '] - ' + $filter('fang')($scope.origin.data) + '**',
-                        '- Analyzer: **'+ $scope.analyzer + '**'
-                    ].join('\n');
+
 
                     _.each(toImport, function(list, key) {
+                        var message = [
+                            '### Discovered from:',
+                            '- Observable: **['+ $scope.origin.dataType + '] - ' + $filter('fang')($scope.origin.data) + '**',
+                            '- Analyzer: **'+ $scope.analyzer + '**'
+                        ];
+                        
+                        var params;
+
+                        if(list.length === 1) {
+                            var obs = list[0];
+
+                            if(obs.message) {
+                                message.push('- Message: ' + obs.message);
+                            }
+
+                            params = {
+                                dataType: key,
+                                single: true,
+                                ioc: false,
+                                sighted: false,
+                                tlp: obs.tlp || 2,
+                                message: message.join('\n'),
+                                tags: [{text: 'src:' + $scope.analyzer}].concat(_.map(_.uniq(obs.tags), function(i) {
+                                    return {text: i};
+                                }))
+                            };
+                        } else {
+                            params = {
+                                dataType: key,
+                                single: list.length === 1,
+                                ioc: false,
+                                sighted: false,
+                                tlp: 2,
+                                message: message.join('\n'),
+                                tags: [{text: 'src:' + $scope.analyzer}]
+                            };
+                        }
+
+
+
+
+                        if(key === 'file') {
+                            params.attachment = _.pluck(list, 'attachment');
+                            params.isUpload = false;
+                        } else {
+                            params.data = _.pluck(list, 'data').join('\n');
+                        }
 
                         var modal = $uibModal.open({
                             animation: 'true',
@@ -82,20 +125,7 @@
                             size: 'lg',
                             resolve: {
                                 params: function() {
-                                    return {
-                                        dataType: key,
-                                        single: list.length === 1,
-                                        ioc: false,
-                                        sighted: false,
-                                        data: _.pluck(list, 'data').join('\n'),
-                                        tlp: 2,
-                                        message: message,
-                                        tags: [],
-                                        tagNames: ''
-                                    };
-                                },
-                                tags: function() {
-                                    return [{text: 'src:' + $scope.analyzer}];
+                                    return params;
                                 }
                             }
                         });

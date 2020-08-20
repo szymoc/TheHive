@@ -1,10 +1,12 @@
 (function() {
     'use strict';
     angular.module('theHiveControllers')
-        .controller('AlertEventCtrl', function($scope, $rootScope, $state, $uibModalInstance, CustomFieldsCacheSrv, CaseResolutionStatus, AlertingSrv, NotificationSrv, event, templates) {
+        .controller('AlertEventCtrl', function($scope, $rootScope, $state, $uibModal, $uibModalInstance, ModalUtilsSrv, CustomFieldsCacheSrv, CaseResolutionStatus, AlertingSrv, NotificationSrv, UiSettingsSrv, clipboard, event, templates, isAdmin, readonly) {
             var self = this;
             var eventId = event.id;
 
+            self.readonly = readonly;
+            self.isAdmin = isAdmin;
             self.templates = _.pluck(templates, 'name');
             self.CaseResolutionStatus = CaseResolutionStatus;
             self.event = event;
@@ -25,6 +27,8 @@
             self.similarCasesStats = [];
             self.customFieldsCache = CustomFieldsCacheSrv;
 
+            self.hideEmptyCaseButton = UiSettingsSrv.hideEmptyCaseButton();
+
             var getTemplateCustomFields = function(customFields) {
                 var result = [];
 
@@ -32,13 +36,13 @@
                     return {
                         name: name,
                         order: definition.order
-                    }
+                    };
                 }), function(item){
                     return item.order;
                 }), 'name');
 
                 return result;
-            }
+            };
 
             this.filterArtifacts = function(value) {
                 self.pagination.currentPage = 1;
@@ -106,7 +110,7 @@
                   .catch(function (response) {
                       NotificationSrv.error('AlertEventCtrl', response.data, response.status);
                   });
-            }
+            };
 
             self.import = function() {
                 self.loading = true;
@@ -143,6 +147,34 @@
                     });
             };
 
+            self.merge = function() {
+                var caseModal = $uibModal.open({
+                    templateUrl: 'views/partials/case/case.merge.html',
+                    controller: 'CaseMergeModalCtrl',
+                    controllerAs: 'dialog',
+                    size: 'lg',
+                    resolve: {
+                        source: function() {
+                            return self.event;
+                        },
+                        title: function() {
+                            return 'Merge Alert: ' + self.event.title;
+                        },
+                        prompt: function() {
+                            return self.event.title;
+                        }
+                    }
+                });
+
+                caseModal.result.then(function(selectedCase) {
+                    self.mergeIntoCase(selectedCase.id);
+                }).catch(function(err) {
+                    if(err && !_.isString(err)) {
+                        NotificationSrv.error('AlertEventCtrl', err.data, err.status);
+                    }
+                });
+            };
+
             this.follow = function() {
                 var fn = angular.noop;
 
@@ -157,6 +189,23 @@
                 }).catch(function(response) {
                     NotificationSrv.error('AlertEventCtrl', response.data, response.status);
                 });
+            };
+
+            this.delete = function() {
+                ModalUtilsSrv.confirm('Remove Alert', 'Are you sure you want to delete this Alert?', {
+                    okText: 'Yes, remove it',
+                    flavor: 'danger'
+                }).then(function() {
+                    AlertingSrv.forceRemove(self.event.id)
+                    .then(function() {
+                        $uibModalInstance.close();
+                        NotificationSrv.log('Alert has been permanently deleted', 'success');
+                    })
+                    .catch(function(response) {
+                        NotificationSrv.error('AlertEventCtrl', response.data, response.status);
+                    });
+                });
+
             };
 
             this.canMarkAsRead = AlertingSrv.canMarkAsRead;
@@ -189,7 +238,7 @@
 
                 // Init the stats object
                 _.each(_.without(_.keys(CaseResolutionStatus), 'Duplicated'), function(key) {
-                    stats[key] = 0
+                    stats[key] = 0;
                 });
 
                 _.each(data, function(item) {
@@ -205,7 +254,7 @@
                     result.push({
                         key: key,
                         value: stats[key]
-                    })
+                    });
                 });
 
                 self.similarCasesStats = result;
@@ -224,6 +273,10 @@
                         resolutionStatus: filter
                     };
                 }
+            };
+
+            self.copyId = function(id) {
+                clipboard.copyText(id);
             };
 
             self.load();

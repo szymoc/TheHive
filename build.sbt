@@ -1,5 +1,6 @@
 import Common._
 import Dependencies._
+import org.thp.ghcl.Milestone
 
 lazy val thehiveBackend = (project in file("thehive-backend"))
   .enablePlugins(PlayScala)
@@ -17,31 +18,10 @@ lazy val thehiveBackend = (project in file("thehive-backend"))
       Library.zip4j,
       Library.reflections,
       Library.akkaCluster,
+      Library.akkaClusterTyped,
       Library.akkaClusterTools
     ),
     play.sbt.routes.RoutesKeys.routesImport -= "controllers.Assets.Asset"
-  )
-
-lazy val thehiveMetrics = (project in file("thehive-metrics"))
-  .enablePlugins(PlayScala)
-  .dependsOn(thehiveBackend)
-  .settings(projectSettings)
-  .settings(
-    publish := {},
-    libraryDependencies ++= Seq(
-      Library.Play.cache,
-      Library.Play.ws,
-      Library.scalaGuice,
-      Library.elastic4play,
-      Library.reflections,
-      "io.dropwizard.metrics" % "metrics-core" % "3.1.2",
-      "io.dropwizard.metrics" % "metrics-json" % "3.1.2",
-      "io.dropwizard.metrics" % "metrics-jvm" % "3.1.2",
-      "io.dropwizard.metrics" % "metrics-logback" % "3.1.2",
-      "io.dropwizard.metrics" % "metrics-graphite" % "3.1.2",
-      "io.dropwizard.metrics" % "metrics-ganglia" % "3.1.2",
-      "info.ganglia.gmetric4j" % "gmetric4j" % "1.0.10"
-    )
   )
 
 lazy val thehiveMisp = (project in file("thehive-misp"))
@@ -75,17 +55,17 @@ lazy val thehiveCortex = (project in file("thehive-cortex"))
   )
 
 lazy val thehive = (project in file("."))
-  .enablePlugins(PlayScala/*, PlayAkkaHttp2Support*/)
+  .enablePlugins(PlayScala /*, PlayAkkaHttp2Support*/ )
   .enablePlugins(Bintray)
-  .dependsOn(thehiveBackend, thehiveMetrics, thehiveMisp, thehiveCortex)
-  .aggregate(thehiveBackend, thehiveMetrics, thehiveMisp, thehiveCortex)
+  .dependsOn(thehiveBackend, thehiveMisp, thehiveCortex)
+  .aggregate(thehiveBackend, thehiveMisp, thehiveCortex)
   .settings(projectSettings)
   .settings(
     aggregate in Debian := false,
     aggregate in Rpm := false,
-    aggregate in Docker := false
+    aggregate in Docker := false,
+    aggregate in changeLog := false
   )
-
 lazy val rpmPackageRelease = (project in file("package/rpm-release"))
   .enablePlugins(RpmPlugin)
   .settings(projectSettings)
@@ -103,25 +83,31 @@ lazy val rpmPackageRelease = (project in file("package/rpm-release"))
     packageDescription :=
       """This package contains the TheHive-Project packages repository
         |GPG key as well as configuration for yum.""".stripMargin,
-    linuxPackageMappings in Rpm := Seq(packageMapping(
-      file("PGP-PUBLIC-KEY") -> "etc/pki/rpm-gpg/GPG-TheHive-Project",
-      file("package/rpm-release/thehive-rpm.repo") -> "/etc/yum.repos.d/thehive-rpm.repo",
-      file("LICENSE") -> "/usr/share/doc/thehive-project-release/LICENSE"
-    ))
+    linuxPackageMappings in Rpm := Seq(
+      packageMapping(
+        file("PGP-PUBLIC-KEY")                       → "etc/pki/rpm-gpg/GPG-TheHive-Project",
+        file("package/rpm-release/thehive-rpm.repo") → "/etc/yum.repos.d/thehive-rpm.repo",
+        file("LICENSE")                              → "/usr/share/doc/thehive-project-release/LICENSE"
+      )
+    )
   )
 
 rpmReleaseFile := {
   import scala.sys.process._
   val rpmFile = (packageBin in Rpm in rpmPackageRelease).value
-  Process("rpm" ::
-    "--define" :: "_gpg_name TheHive Project" ::
-    "--define" :: "_signature gpg" ::
-    "--define" :: "__gpg_check_password_cmd /bin/true" ::
-    "--define" :: "__gpg_sign_cmd %{__gpg} gpg --batch --no-verbose --no-armor --use-agent --no-secmem-warning -u \"%{_gpg_name}\" -sbo %{__signature_filename} %{__plaintext_filename}" ::
-    "--addsign" :: rpmFile.toString ::
-    Nil).!!
+  Process(
+    "rpm" ::
+      "--define" :: "_gpg_name TheHive Project" ::
+      "--define" :: "_signature gpg" ::
+      "--define" :: "__gpg_check_password_cmd /bin/true" ::
+      "--define" :: "__gpg_sign_cmd %{__gpg} gpg --batch --no-verbose --no-armor --use-agent --no-secmem-warning -u \"%{_gpg_name}\" -sbo %{__signature_filename} %{__plaintext_filename}" ::
+      "--addsign" :: rpmFile.toString ::
+      Nil
+  ).!!
   rpmFile
 }
+
+milestoneFilter := ((milestone: Milestone) ⇒ milestone.title.head < '4')
 
 bintrayOrganization := Some("thehive-project")
 

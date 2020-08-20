@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('theHiveControllers').controller('CaseObservablesItemCtrl',
-        function ($scope, $state, $stateParams, $q, $filter, $timeout, $document, CaseTabsSrv, CaseArtifactSrv, CortexSrv, PSearchSrv, AnalyzerSrv, NotificationSrv, VersionSrv, appConfig) {
+        function ($scope, $state, $stateParams, $q, $filter, $timeout, $document, CaseTabsSrv, CaseArtifactSrv, CortexSrv, PSearchSrv, AnalyzerSrv, NotificationSrv, VersionSrv, TagSrv, appConfig, artifact) {
             var observableId = $stateParams.itemId,
                 observableName = 'observable-' + observableId;
 
@@ -18,11 +18,12 @@
                 'logMissing': ''
             };
 
-            $scope.artifact = {};
-            $scope.artifact.tlp = $scope.artifact.tlp || -1;
+            $scope.artifact = artifact;
+            $scope.artifact.tlp = $scope.artifact.tlp !== undefined ? $scope.artifact.tlp : -1;
             $scope.analysisEnabled = VersionSrv.hasCortex();
             $scope.cortexServers = $scope.analysisEnabled && appConfig.connectors.cortex.servers;
             $scope.protectDownloadsWith = appConfig.config.protectDownloadsWith;
+            $scope.similarArtifactsLimit = 10;
 
             $scope.editorOptions = {
                 lineNumbers: true,
@@ -32,37 +33,23 @@
                 mode: 'vb'
             };
 
-            CaseArtifactSrv.api().get({
-                'artifactId': observableId
-            }, function (observable) {
-
-                // Add tab
-                CaseTabsSrv.addTab(observableName, {
-                    name: observableName,
-                    label: observable.data || observable.attachment.name,
-                    closable: true,
-                    state: 'app.case.observables-item',
-                    params: {
-                        itemId: observable.id
-                    }
-                });
-
-                // Select tab
-                $timeout(function() {
-                    CaseTabsSrv.activateTab(observableName);
-                }, 0);
-
-
-                // Prepare the scope data
-                $scope.initScope(observable);
-
-            }, function (response) {
-                NotificationSrv.error('artifactDetails', response.data, response.status);
-                CaseTabsSrv.activateTab('observables');
+            // Add tab
+            CaseTabsSrv.addTab(observableName, {
+                name: observableName,
+                label: artifact.data || artifact.attachment.name,
+                closable: true,
+                state: 'app.case.observables-item',
+                params: {
+                    itemId: artifact.id
+                }
             });
 
+            // Select tab
+            $timeout(function() {
+                CaseTabsSrv.activateTab(observableName);
+            }, 0);
+
             $scope.initScope = function (artifact) {
-                $scope.artifact = artifact;
 
                 // Get analyzers available for the observable's datatype
                 AnalyzerSrv.forDataType(artifact.dataType)
@@ -101,6 +88,9 @@
                   });
             };
 
+            // Prepare the scope data
+            $scope.initScope(artifact);
+
             $scope.onJobsChange = function (updates) {
                 $scope.analyzerJobs = {};
 
@@ -129,11 +119,15 @@
                         }, function (observable) {
                             $scope.artifact = observable;
                         }, function (response) {
-                            NotificationSrv.error('artifactDetails', response.data, response.status);
+                            NotificationSrv.error('ObservableDetails', response.data, response.status);
                             CaseTabsSrv.activateTab('observables');
                         });
                     }
                 }
+            };
+
+            $scope.showMoreSimilar = function() {
+                $scope.similarArtifactsLimit = $scope.similarArtifactsLimit + 10;
             };
 
             $scope.showReport = function (jobId) {
@@ -161,12 +155,14 @@
                     }, 500);
 
                 }, function(/*err*/) {
-                    NotificationSrv.log('An expected error occured while fetching the job report');
+                    NotificationSrv.log('An expected error occurred while fetching the job report');
                 });
             };
 
             $scope.similarArtifacts = CaseArtifactSrv.api().similar({
-                'artifactId': observableId
+                artifactId: observableId,
+                range: 'all',
+                sort: ['-startDate']
             });
 
 
@@ -195,8 +191,9 @@
                     artifactId: $scope.artifact.id
                 }, field, function (response) {
                     $scope.artifact = response.toJSON();
+                    NotificationSrv.log('Observable has been updated', 'success');
                 }, function (response) {
-                    NotificationSrv.error('artifactDetails', response.data, response.status);
+                    NotificationSrv.error('ObservableDetails', response.data, response.status);
                 });
             };
 
@@ -211,7 +208,7 @@
             $scope.runAnalyzer = function (analyzerName, serverId) {
                 var artifactName = $scope.artifact.data || $scope.artifact.attachment.name;
 
-                var promise = serverId ? $q.resolve(serverId) : CortexSrv.getServers([analyzerName])
+                var promise = serverId ? $q.resolve(serverId) : CortexSrv.getServers([analyzerName]);
 
                 promise.then(function (serverId) {
                         return $scope._runAnalyzer(serverId, analyzerName, $scope.artifact.id);
@@ -254,8 +251,8 @@
                       $scope.obsResponders = responders;
                   })
                   .catch(function(err) {
-                      NotificationSrv.error('observablesList', response.data, response.status);
-                  })
+                      NotificationSrv.error('observablesList', err.data, err.status);
+                  });
             };
 
             $scope.runResponder = function(responderId, responderName, artifact) {
@@ -269,6 +266,10 @@
                           NotificationSrv.error('observablesList', response.data, response.status);
                       }
                   });
+            };
+
+            $scope.getTags = function(query) {
+                return TagSrv.fromObservables(query);
             };
 
         }

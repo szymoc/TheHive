@@ -5,7 +5,7 @@
     'use strict';
 
     angular.module('theHiveControllers').controller('ObservableCreationCtrl',
-        function($scope, $stateParams, $uibModalInstance, clipboard, CaseArtifactSrv, ListSrv, NotificationSrv, params, tags) {
+        function($scope, $stateParams, $uibModalInstance, clipboard, CaseArtifactSrv, ListSrv, NotificationSrv, TagSrv, params) {
 
             $scope.activeTlp = 'active';
             $scope.pendingAsync = false;
@@ -14,6 +14,7 @@
                 ioc: false,
                 sighted: false,
                 single: false,
+                isUpload: true,
                 isZip: false,
                 zipPassword: '',
                 data: '',
@@ -22,9 +23,8 @@
                 tags: [],
                 tagNames: ''
             };
-            $scope.tags = tags || [];
 
-            $scope.$watchCollection('tags', function(value) {
+            $scope.$watchCollection('params.tags', function(value) {
                 $scope.params.tagNames = _.pluck(value, 'text').join(',');
             });
 
@@ -75,24 +75,33 @@
                         sighted: params.sighted,
                         tlp: params.tlp,
                         message: params.message,
-                        tags: _.unique(_.pluck($scope.tags, 'text'))
+                        tags: _.unique(_.pluck(params.tags, 'text'))
                     };
 
-                var isFile = params.dataType === 'file';
+                var isFile = params.dataType === 'file' && params.isUpload;
+                var isAttachment = params.dataType === 'file' && !params.isUpload;
 
-                if (!isFile) {
-                    if(params.single === true) {
-                        postData.data = params.data;
-                    } else {
-                        postData.data = params.data.split('\n');
-                        count = postData.length;
-                    }                    
-                } else {
+                // TODO add support to the attachment case
+                if(isAttachment) {
+                    // Observable is an existing file
+                    postData.attachment = params.attachment;
+                    count = postData.length;
+
+                } else if(isFile) {
+                    // Observable is an uploaded file
                     postData.attachment = params.attachment;
 
                     if(params.isZip) {
                         postData.isZip = params.isZip;
                         postData.zipPassword = params.zipPassword;
+                    }
+                } else {
+                    // Observable is anything else
+                    if(params.single === true) {
+                        postData.data = params.data;
+                    } else {
+                        postData.data = params.data.split('\n');
+                        count = postData.length;
                     }
                 }
 
@@ -142,20 +151,18 @@
             $scope.handleSaveFailure = function(response) {
                 $scope.pendingAsync = false;
 
-                if (response.status === 400) {
+                if (response.status === 400 && (response.data.type === 'ConflictError' || _.isArray(response.data))) {
                     $scope.failedObservables = $scope.getFailedObservables(response.data);
 
                     $scope.step = 'error';
-
                 } else {
-										if(response.data.type === "java.io.IOException")
-                    	NotificationSrv.error('ObservableCreationCtrl', response.data.message, response.status);
-										else if(response.data.type === "InternalError")
-											NotificationSrv.error('ObservableCreationCtrl', response.data.message, response.status);
-										else
-	                    NotificationSrv.error('ObservableCreationCtrl', 'An unexpected error occurred while creating the observables', response.status);
+										if(response.data.type) {
+                        NotificationSrv.error('ObservableCreationCtrl', response.data.message, response.status);
+                    } else {
+                        NotificationSrv.error('ObservableCreationCtrl', 'An unexpected error occurred while creating the observables', response.status);
+                    }
 
-                    $uibModalInstance.close(response);
+                    //$uibModalInstance.close(response);
                 }
 
             };
@@ -178,6 +185,9 @@
                 }
             };
 
+            $scope.getTags = function(query) {
+                return TagSrv.fromObservables(query);
+            };
         }
     );
 

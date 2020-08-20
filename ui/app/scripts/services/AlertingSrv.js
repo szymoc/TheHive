@@ -38,6 +38,13 @@
                     return $http.post(baseUrl + '/' + alertId + '/merge/' + caseId);
                 },
 
+                bulkMergeInto: function(alertIds, caseId) {
+                    return $http.post(baseUrl + '/merge/_bulk', {
+                        caseId: caseId,
+                        alertIds: alertIds
+                    });
+                },
+
                 canMarkAsRead: function(event) {
                     return event.status === 'New' || event.status === 'Updated';
                 },
@@ -60,6 +67,24 @@
 
                 unfollow: function(alertId) {
                     return $http.post(baseUrl + '/' + alertId + '/unfollow');
+                },
+
+                forceRemove: function(alertId) {
+                    return $http.delete(baseUrl + '/' + alertId, {
+                        params: {
+                            force: 1
+                        }
+                    });
+                },
+
+                bulkRemove: function(alertIds) {
+                    return $http.post(baseUrl + '/delete/_bulk', {
+                        ids: alertIds
+                    }, {
+                        params: {
+                            force: 1
+                        }
+                    });
                 },
 
                 stats: function(scope) {
@@ -124,6 +149,29 @@
                     });
 
                     return defer.promise;
+                },
+
+                types: function(query) {
+                  var defer = $q.defer();
+
+                  StatSrv.getPromise({
+                      objectType: 'alert',
+                      field: 'type',
+                      limit: 1000
+                  }).then(function(response) {
+                      var alertTypes = [];
+
+                      alertTypes = _.map(_.filter(_.keys(response.data), function(tpe) {
+                          var regex = new RegExp(query, 'gi');
+                          return regex.test(tpe);
+                      }), function(tpe) {
+                          return {text: tpe};
+                      });
+
+                      defer.resolve(alertTypes);
+                  });
+
+                  return defer.promise;
                 }
             };
 
