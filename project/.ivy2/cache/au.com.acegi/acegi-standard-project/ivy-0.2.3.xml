@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven" xmlns:e="http://ant.apache.org/ivy/extra">
+	<info organisation="au.com.acegi"
+		module="acegi-standard-project"
+		revision="0.2.3"
+		status="release"
+		publication="20190601025628"
+	>
+		<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt" />
+		<description homepage="https://github.com/${github.org}/${github.repo}">
+		Conventions and configurations to simplify the long-term development of Java projects.
+		</description>
+		<m:dependency.management__junit__junit__version>4.12</m:dependency.management__junit__junit__version>
+		<m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__scope>provided</m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__scope>
+		<m:properties__maven.build.timestamp.format>yyyy-MM-dd&apos;T&apos;HH:mm:ss&apos;Z&apos;</m:properties__maven.build.timestamp.format>
+		<m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__exclusion_0>org.apache.maven__maven-artifact</m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__exclusion_0>
+		<m:dependency.management__com.google.code.findbugs__annotations__exclusion_0>com.google.code.findbugs__jsr305</m:dependency.management__com.google.code.findbugs__annotations__exclusion_0>
+		<m:properties__github.repo>acegi-standard-project</m:properties__github.repo>
+		<m:dependency.management__com.google.code.findbugs__annotations__exclusion_1>net.jcip__jcip-annotations</m:dependency.management__com.google.code.findbugs__annotations__exclusion_1>
+		<m:properties__pmd.version>6.15.0</m:properties__pmd.version>
+		<m:dependency.management__com.google.code.findbugs__jsr305__scope>provided</m:dependency.management__com.google.code.findbugs__jsr305__scope>
+		<m:properties__maven.enforcer.java>1.8</m:properties__maven.enforcer.java>
+		<m:dependency.management__org.hamcrest__hamcrest__version>2.1</m:dependency.management__org.hamcrest__hamcrest__version>
+		<m:properties__acegi.standard.resources.version>0.2.3</m:properties__acegi.standard.resources.version>
+		<m:dependency.management__org.apache.maven__maven-plugin-api__exclusion_0>org.eclipse.sisu__org.eclipse.sisu.plexus</m:dependency.management__org.apache.maven__maven-plugin-api__exclusion_0>
+		<m:dependency.management__com.google.code.findbugs__annotations__scope>provided</m:dependency.management__com.google.code.findbugs__annotations__scope>
+		<m:dependency.management__org.codehaus.plexus__plexus-utils__version>3.2.0</m:dependency.management__org.codehaus.plexus__plexus-utils__version>
+		<e:sbtTransformHash>86a190965ee1d0a2b4cb22091f116bdc3f0bf068</e:sbtTransformHash>
+		<m:properties__maven.compiler.target>1.8</m:properties__maven.compiler.target>
+		<m:properties__trimStackTrace>false</m:properties__trimStackTrace>
+		<m:properties__github.global.server>github</m:properties__github.global.server>
+		<m:dependency.management__junit__junit__scope>test</m:dependency.management__junit__junit__scope>
+		<m:dependency.management__org.hamcrest__hamcrest__scope>test</m:dependency.management__org.hamcrest__hamcrest__scope>
+		<m:properties__pmd.ruleset>/au/com/acegi/standard/rule-set-pmd.xml</m:properties__pmd.ruleset>
+		<m:properties__github.org>acegi</m:properties__github.org>
+		<m:properties__project.build.sourceEncoding>UTF-8</m:properties__project.build.sourceEncoding>
+		<m:dependency.management__org.apache.maven__maven-plugin-api__version>3.6.1</m:dependency.management__org.apache.maven__maven-plugin-api__version>
+		<m:dependency.management__com.google.code.findbugs__annotations__version>3.0.1u2</m:dependency.management__com.google.code.findbugs__annotations__version>
+		<m:properties__maven.enforcer.mvn>3.5.4</m:properties__maven.enforcer.mvn>
+		<m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__version>3.6.0</m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__version>
+		<m:dependency.management__com.google.code.findbugs__jsr305__version>3.0.2</m:dependency.management__com.google.code.findbugs__jsr305__version>
+		<m:properties__maven.compiler.source>1.8</m:properties__maven.compiler.source>
+		<m:dependency.management__junit__junit__exclusion_0>org.hamcrest__hamcrest-core</m:dependency.management__junit__junit__exclusion_0>
+	</info>
+	<configurations>
+		<conf name="default" visibility="public" description="runtime dependencies and master artifact can be used with this conf" extends="runtime,master"/>
+		<conf name="master" visibility="public" description="contains only the artifact published by this module itself, with no transitive dependencies"/>
+		<conf name="compile" visibility="public" description="this is the default scope, used if none is specified. Compile dependencies are available in all classpaths."/>
+		<conf name="provided" visibility="public" description="this is much like compile, but indicates you expect the JDK or a container to provide it. It is only available on the compilation classpath, and is not transitive."/>
+		<conf name="runtime" visibility="public" description="this scope indicates that the dependency is not required for compilation, but is for execution. It is in the runtime and test classpaths, but not the compile classpath." extends="compile"/>
+		<conf name="test" visibility="private" description="this scope indicates that the dependency is not required for normal use of the application, and is only available for the test compilation and execution phases." extends="runtime"/>
+		<conf name="system" visibility="public" description="this scope is similar to provided except that you have to provide the JAR which contains it explicitly. The artifact is always available and is not looked up in a repository."/>
+		<conf name="sources" visibility="public" description="this configuration contains the source artifact of this module, if any."/>
+		<conf name="javadoc" visibility="public" description="this configuration contains the javadoc artifact of this module, if any."/>
+		<conf name="optional" visibility="public" description="contains all optional dependencies"/>
+	</configurations>
+	<publications>
+	</publications>
+</ivy-module>

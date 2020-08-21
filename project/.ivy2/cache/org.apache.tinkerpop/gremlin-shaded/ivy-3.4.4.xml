@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven" xmlns:e="http://ant.apache.org/ivy/extra">
+	<info organisation="org.apache.tinkerpop"
+		module="gremlin-shaded"
+		revision="3.4.4"
+		status="release"
+		publication="20191014172259"
+	>
+		<license name="Apache 2" url="http://www.opensource.org/licenses/Apache-2.0" />
+		<description homepage="" />
+		<m:properties__log4j-silent.properties>file:target/test-classes/log4j-silent.properties</m:properties__log4j-silent.properties>
+		<m:properties__groovy.version>2.5.7</m:properties__groovy.version>
+		<m:dependency.management__com.codahale.metrics__metrics-graphite__version>3.0.2</m:dependency.management__com.codahale.metrics__metrics-graphite__version>
+		<m:dependency.management__commons-codec__commons-codec__version>1.12</m:dependency.management__commons-codec__commons-codec__version>
+		<m:dependency.management__org.apache.httpcomponents__httpclient__version>4.5.8</m:dependency.management__org.apache.httpcomponents__httpclient__version>
+		<m:properties__commons.lang.version>2.6</m:properties__commons.lang.version>
+		<m:dependency.management__commons-configuration__commons-configuration__exclusion_0>commons-logging__commons-logging</m:dependency.management__commons-configuration__commons-configuration__exclusion_0>
+		<m:dependency.management__commons-collections__commons-collections__version>3.2.2</m:dependency.management__commons-collections__commons-collections__version>
+		<m:properties__skipIntegrationTests>true</m:properties__skipIntegrationTests>
+		<m:properties__hadoop.version>2.7.2</m:properties__hadoop.version>
+		<m:dependency.management__org.slf4j__jcl-over-slf4j__version>1.7.25</m:dependency.management__org.slf4j__jcl-over-slf4j__version>
+		<m:dependency.management__org.slf4j__slf4j-log4j12__version>1.7.25</m:dependency.management__org.slf4j__slf4j-log4j12__version>
+		<m:dependency.management__org.slf4j__slf4j-api__version>1.7.25</m:dependency.management__org.slf4j__slf4j-api__version>
+		<m:dependency.management__org.apache.commons__commons-lang3__version>3.8.1</m:dependency.management__org.apache.commons__commons-lang3__version>
+		<m:properties__project.reporting.outputEncoding>UTF-8</m:properties__project.reporting.outputEncoding>
+		<m:properties__distMgmtSnapshotsUrl>https://repository.apache.org/content/repositories/snapshots</m:properties__distMgmtSnapshotsUrl>
+		<m:properties__slf4j.version>1.7.25</m:properties__slf4j.version>
+		<m:properties__gpg.useagent>true</m:properties__gpg.useagent>
+		<m:dependency.management__org.mockito__mockito-core__version>1.10.19</m:dependency.management__org.mockito__mockito-core__version>
+		<m:properties__assembly.tarLongFileMode>posix</m:properties__assembly.tarLongFileMode>
+		<m:dependency.management__org.jacoco__jacoco-maven-plugin__version>0.8.4</m:dependency.management__org.jacoco__jacoco-maven-plugin__version>
+		<m:dependency.management__org.apache.hadoop__hadoop-core__version>1.2.1</m:dependency.management__org.apache.hadoop__hadoop-core__version>
+		<m:dependency.management__junit__junit__exclusion_0>org.hamcrest__hamcrest-core</m:dependency.management__junit__junit__exclusion_0>
+		<m:properties__snakeyaml.version>1.15</m:properties__snakeyaml.version>
+		<m:properties__jcabi.version>1.1</m:properties__jcabi.version>
+		<m:properties__spark.version>2.4.0</m:properties__spark.version>
+		<m:dependency.management__junit__junit__version>4.12</m:dependency.management__junit__junit__version>
+		<m:dependency.management__log4j__log4j__version>1.2.17</m:dependency.management__log4j__log4j__version>
+		<m:properties__organization.logo>https://www.apache.org/images/asf_logo_wide.gif</m:properties__organization.logo>
+		<m:properties__java.tuples.version>1.2</m:properties__java.tuples.version>
+		<m:properties__muteTestLogs>false</m:properties__muteTestLogs>
+		<m:dependency.management__org.apache.hadoop__hadoop-core__exclusion_1>commons-codec__commons-codec</m:dependency.management__org.apache.hadoop__hadoop-core__exclusion_1>
+		<m:dependency.management__commons-httpclient__commons-httpclient__version>3.1</m:dependency.management__commons-httpclient__commons-httpclient__version>
+		<m:dependency.management__org.apache.hadoop__hadoop-core__exclusion_0>commons-httpclient__commons-httpclient</m:dependency.management__org.apache.hadoop__hadoop-core__exclusion_0>
+		<m:dependency.management__commons-io__commons-io__version>2.6</m:dependency.management__commons-io__commons-io__version>
+		<m:dependency.management__org.apache.hadoop__hadoop-core__exclusion_3>commons-logging__commons-logging</m:dependency.management__org.apache.hadoop__hadoop-core__exclusion_3>
+		<m:dependency.management__org.apache.hadoop__hadoop-core__exclusion_2>junit__junit</m:dependency.management__org.apache.hadoop__hadoop-core__exclusion_2>
+		<m:properties__metrics.version>3.0.2</m:properties__metrics.version>
+		<m:properties__commons.configuration.version>1.10</m:properties__commons.configuration.version>
+		<m:dependency.management__org.mockito__mockito-core__exclusion_0>org.hamcrest__hamcrest-core</m:dependency.management__org.mockito__mockito-core__exclusion_0>
+		<e:sbtTransformHash>a27c66cea42b57755b5f0729b900cc369947474e</e:sbtTransformHash>
+		<m:properties__maven.compiler.target>1.7</m:properties__maven.compiler.target>
+		<m:properties__javadoc-plugin.version>2.10.4</m:properties__javadoc-plugin.version>
+		<m:properties__log4j-test.properties>file:target/test-classes/log4j-test.properties</m:properties__log4j-test.properties>
+		<m:maven.plugins>org.apache.maven.plugins__maven-remote-resources-plugin__null|org.apache.maven.plugins__maven-enforcer-plugin__null|org.apache.maven.plugins__maven-site-plugin__null|org.apache.maven.plugins__maven-remote-resources-plugin__null|org.apache.maven.plugins__maven-enforcer-plugin__null|org.apache.maven.plugins__maven-site-plugin__null|org.codehaus.mojo__versions-maven-plugin__2.7|org.apache.maven.plugins__maven-compiler-plugin__null|null__maven-enforcer-plugin__1.4.1|org.apache.maven.plugins__maven-source-plugin__3.0.1|org.apache.maven.plugins__maven-assembly-plugin__null|org.apache.maven.plugins__maven-javadoc-plugin__null|org.codehaus.mojo__buildnumber-maven-plugin__1.4|org.codehaus.mojo__build-helper-maven-plugin__3.0.0|org.apache.maven.plugins__maven-jar-plugin__3.0.2|org.apache.rat__apache-rat-plugin__0.13|org.apache.maven.plugins__maven-site-plugin__null|org.apache.maven.plugins__maven-remote-resources-plugin__null|org.apache.maven.plugins__maven-enforcer-plugin__null|org.apache.maven.plugins__maven-site-plugin__null|org.apache.maven.plugins__maven-remote-resources-plugin__null|org.apache.maven.plugins__maven-enforcer-plugin__null|org.apache.maven.plugins__maven-site-plugin__null|org.codehaus.mojo__versions-maven-plugin__2.7|org.apache.maven.plugins__maven-compiler-plugin__null|null__maven-enforcer-plugin__1.4.1|org.apache.maven.plugins__maven-source-plugin__3.0.1|org.apache.maven.plugins__maven-assembly-plugin__null|org.apache.maven.plugins__maven-javadoc-plugin__null|org.codehaus.mojo__buildnumber-maven-plugin__1.4|org.codehaus.mojo__build-helper-maven-plugin__3.0.0|org.apache.maven.plugins__maven-jar-plugin__3.0.2|org.apache.rat__apache-rat-plugin__0.13|org.apache.maven.plugins__maven-site-plugin__null|null__maven-shade-plugin__null</m:maven.plugins>
+		<m:dependency.management__com.codahale.metrics__metrics-graphite__exclusion_0>org.slf4j__slf4j-api</m:dependency.management__com.codahale.metrics__metrics-graphite__exclusion_0>
+		<m:dependency.management__org.apache.httpcomponents__httpclient__exclusion_0>commons-codec__commons-codec</m:dependency.management__org.apache.httpcomponents__httpclient__exclusion_0>
+		<m:dependency.management__commons-httpclient__commons-httpclient__exclusion_0>commons-logging__commons-logging</m:dependency.management__commons-httpclient__commons-httpclient__exclusion_0>
+		<m:dependency.management__org.hamcrest__hamcrest-all__version>1.3</m:dependency.management__org.hamcrest__hamcrest-all__version>
+		<m:properties__log4j.version>1.2.17</m:properties__log4j.version>
+		<m:properties__netty.version>4.1.36.Final</m:properties__netty.version>
+		<m:properties__project.build.sourceEncoding>UTF-8</m:properties__project.build.sourceEncoding>
+		<m:properties__surefire.version>2.22.0</m:properties__surefire.version>
+		<m:properties__commons.lang3.version>3.8.1</m:properties__commons.lang3.version>
+		<m:properties__distMgmtSnapshotsName>Apache Development Snapshot Repository</m:properties__distMgmtSnapshotsName>
+		<m:dependency.management__com.codahale.metrics__metrics-core__version>3.0.2</m:dependency.management__com.codahale.metrics__metrics-core__version>
+		<m:dependency.management__commons-configuration__commons-configuration__version>1.10</m:dependency.management__commons-configuration__commons-configuration__version>
+		<m:properties__sourceReleaseAssemblyDescriptor>source-release</m:properties__sourceReleaseAssemblyDescriptor>
+		<m:dependency.management__com.codahale.metrics__metrics-ganglia__version>3.0.2</m:dependency.management__com.codahale.metrics__metrics-ganglia__version>
+		<m:dependency.management__com.codahale.metrics__metrics-core__exclusion_0>org.slf4j__slf4j-api</m:dependency.management__com.codahale.metrics__metrics-core__exclusion_0>
+		<m:properties__maven.compiler.source>1.7</m:properties__maven.compiler.source>
+		<m:dependency.management__com.codahale.metrics__metrics-ganglia__exclusion_0>org.slf4j__slf4j-api</m:dependency.management__com.codahale.metrics__metrics-ganglia__exclusion_0>
+		<m:dependency.management__com.codahale.metrics__metrics-ganglia__exclusion_1>org.acplt__oncrpc</m:dependency.management__com.codahale.metrics__metrics-ganglia__exclusion_1>
+	</info>
+	<configurations>
+		<conf name="default" visibility="public" description="runtime dependencies and master artifact can be used with this conf" extends="runtime,master"/>
+		<conf name="master" visibility="public" description="contains only the artifact published by this module itself, with no transitive dependencies"/>
+		<conf name="compile" visibility="public" description="this is the default scope, used if none is specified. Compile dependencies are available in all classpaths."/>
+		<conf name="provided" visibility="public" description="this is much like compile, but indicates you expect the JDK or a container to provide it. It is only available on the compilation classpath, and is not transitive."/>
+		<conf name="runtime" visibility="public" description="this scope indicates that the dependency is not required for compilation, but is for execution. It is in the runtime and test classpaths, but not the compile classpath." extends="compile"/>
+		<conf name="test" visibility="private" description="this scope indicates that the dependency is not required for normal use of the application, and is only available for the test compilation and execution phases." extends="runtime"/>
+		<conf name="system" visibility="public" description="this scope is similar to provided except that you have to provide the JAR which contains it explicitly. The artifact is always available and is not looked up in a repository."/>
+		<conf name="sources" visibility="public" description="this configuration contains the source artifact of this module, if any."/>
+		<conf name="javadoc" visibility="public" description="this configuration contains the javadoc artifact of this module, if any."/>
+		<conf name="optional" visibility="public" description="contains all optional dependencies"/>
+	</configurations>
+	<publications>
+		<artifact name="gremlin-shaded" type="jar" ext="jar" conf="master"/>
+	</publications>
+	<dependencies>
+		<dependency org="com.esotericsoftware" name="kryo-shaded" rev="3.0.3" force="true" conf="optional->compile(*),master(compile)"/>
+		<dependency org="com.esotericsoftware" name="minlog" rev="1.3.0" force="true" conf="optional->compile(*),master(compile)"/>
+		<dependency org="org.objenesis" name="objenesis" rev="2.1" force="true" conf="optional->compile(*),master(compile)"/>
+		<dependency org="com.fasterxml.jackson.core" name="jackson-databind" rev="2.9.10" force="true" conf="optional->compile(*),master(compile)"/>
+	</dependencies>
+</ivy-module>

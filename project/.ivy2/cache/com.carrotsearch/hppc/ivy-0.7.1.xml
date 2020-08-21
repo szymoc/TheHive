@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven" xmlns:e="http://ant.apache.org/ivy/extra">
+	<info organisation="com.carrotsearch"
+		module="hppc"
+		revision="0.7.1"
+		status="release"
+		publication="20150507073334"
+	>
+		<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt" />
+		<description homepage="">
+		High Performance Primitive Collections. 
+  Fundamental data structures (maps, sets, lists, stacks, queues) generated for
+  combinations of object and primitive types to conserve JVM memory and speed
+  up execution.
+		</description>
+		<m:dependency.management__junit__junit__version>4.12</m:dependency.management__junit__junit__version>
+		<m:properties__version.maven-assembly-plugin>2.5.2</m:properties__version.maven-assembly-plugin>
+		<m:properties__version.randomizedtesting>2.1.14</m:properties__version.randomizedtesting>
+		<m:properties__version.maven-enforcer-plugin>1.4</m:properties__version.maven-enforcer-plugin>
+		<m:properties__version.maven-dependency-plugin>2.9</m:properties__version.maven-dependency-plugin>
+		<m:properties__version.maven-javadoc-plugin>2.10.3</m:properties__version.maven-javadoc-plugin>
+		<m:properties__version.assertj>2.0.0</m:properties__version.assertj>
+		<m:properties__version.fastutil>7.0.2</m:properties__version.fastutil>
+		<m:properties__version.maven-surefire-plugin>2.17</m:properties__version.maven-surefire-plugin>
+		<m:properties__version.koloboke>0.6.6</m:properties__version.koloboke>
+		<m:properties__version.maven-versions-plugin>2.1</m:properties__version.maven-versions-plugin>
+		<m:properties__version.junit>4.12</m:properties__version.junit>
+		<m:dependency.management__org.assertj__assertj-core__version>2.0.0</m:dependency.management__org.assertj__assertj-core__version>
+		<m:properties__version.velocity>1.7</m:properties__version.velocity>
+		<e:sbtTransformHash>83a52b889531416d7169cc27981227d3e89a6000</e:sbtTransformHash>
+		<m:properties__maven.compiler.target>1.7</m:properties__maven.compiler.target>
+		<m:dependency.management__com.carrotsearch.randomizedtesting__randomizedtesting-runner__version>2.1.11</m:dependency.management__com.carrotsearch.randomizedtesting__randomizedtesting-runner__version>
+		<m:properties__version.maven-shade-plugin>2.2</m:properties__version.maven-shade-plugin>
+		<m:properties__version.maven.api>3.2.3</m:properties__version.maven.api>
+		<m:properties__version.antlr>4.5</m:properties__version.antlr>
+		<m:properties__version.maven-resources-plugin>2.6</m:properties__version.maven-resources-plugin>
+		<m:properties__sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</m:properties__sonatypeOssDistMgmtSnapshotsUrl>
+		<m:maven.plugins>org.apache.maven.plugins__maven-enforcer-plugin__1.2|org.apache.maven.plugins__maven-enforcer-plugin__1.2|org.apache.maven.plugins__maven-enforcer-plugin__1.4|org.apache.maven.plugins__maven-enforcer-plugin__1.2|org.apache.maven.plugins__maven-enforcer-plugin__1.2|org.apache.maven.plugins__maven-enforcer-plugin__1.4|org.apache.maven.plugins__maven-source-plugin__2.4|org.apache.maven.plugins__maven-jar-plugin__null|com.carrotsearch__hppc-template-processor__0.7.1|com.carrotsearch.randomizedtesting__junit4-maven-plugin__null|org.apache.maven.plugins__maven-assembly-plugin__null|de.thetaphi__forbiddenapis__null</m:maven.plugins>
+		<m:properties__version.forbiddenapis>1.8</m:properties__version.forbiddenapis>
+		<m:properties__version.maven-clean-plugin>2.5</m:properties__version.maven-clean-plugin>
+		<m:dependency.management__com.google.guava__guava__version>18.0</m:dependency.management__com.google.guava__guava__version>
+		<m:properties__template.processor.incremental>true</m:properties__template.processor.incremental>
+		<m:properties__version.jmh>1.6.2</m:properties__version.jmh>
+		<m:properties__version.maven-buildhelper-plugin>1.9.1</m:properties__version.maven-buildhelper-plugin>
+		<m:properties__version.maven-install-plugin>2.5.2</m:properties__version.maven-install-plugin>
+		<m:properties__project.build.sourceEncoding>UTF-8</m:properties__project.build.sourceEncoding>
+		<m:properties__version.guava>18.0</m:properties__version.guava>
+		<m:properties__version.maven-jar-plugin>2.5</m:properties__version.maven-jar-plugin>
+		<m:properties__version.maven-deploy-plugin>2.8.2</m:properties__version.maven-deploy-plugin>
+		<m:properties__version.maven-compiler-plugin>3.1</m:properties__version.maven-compiler-plugin>
+		<m:properties__maven.compiler.source>1.7</m:properties__maven.compiler.source>
+	</info>
+	<configurations>
+		<conf name="default" visibility="public" description="runtime dependencies and master artifact can be used with this conf" extends="runtime,master"/>
+		<conf name="master" visibility="public" description="contains only the artifact published by this module itself, with no transitive dependencies"/>
+		<conf name="compile" visibility="public" description="this is the default scope, used if none is specified. Compile dependencies are available in all classpaths."/>
+		<conf name="provided" visibility="public" description="this is much like compile, but indicates you expect the JDK or a container to provide it. It is only available on the compilation classpath, and is not transitive."/>
+		<conf name="runtime" visibility="public" description="this scope indicates that the dependency is not required for compilation, but is for execution. It is in the runtime and test classpaths, but not the compile classpath." extends="compile"/>
+		<conf name="test" visibility="private" description="this scope indicates that the dependency is not required for normal use of the application, and is only available for the test compilation and execution phases." extends="runtime"/>
+		<conf name="system" visibility="public" description="this scope is similar to provided except that you have to provide the JAR which contains it explicitly. The artifact is always available and is not looked up in a repository."/>
+		<conf name="sources" visibility="public" description="this configuration contains the source artifact of this module, if any."/>
+		<conf name="javadoc" visibility="public" description="this configuration contains the javadoc artifact of this module, if any."/>
+		<conf name="optional" visibility="public" description="contains all optional dependencies"/>
+	</configurations>
+	<publications>
+		<artifact name="hppc" type="jar" ext="jar" conf="master"/>
+	</publications>
+	<dependencies>
+		<dependency org="junit" name="junit" rev="4.12" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="com.carrotsearch" name="hppc-template-processor" rev="0.7.1" force="true" conf="optional->compile(*),provided(*),runtime(*),master(compile)"/>
+		<dependency org="com.carrotsearch.randomizedtesting" name="randomizedtesting-runner" rev="2.1.11" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.assertj" name="assertj-core" rev="2.0.0" force="true" conf="test->runtime(*),master(compile)"/>
+	</dependencies>
+</ivy-module>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven" xmlns:e="http://ant.apache.org/ivy/extra">
+	<info organisation="org.janusgraph"
+		module="janusgraph-es"
+		revision="0.5.2"
+		status="release"
+		publication="20200506001441"
+	>
+		<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt" />
+		<description homepage="https://janusgraph.org" />
+		<m:dependency.management__commons-codec__commons-codec__version>1.14</m:dependency.management__commons-codec__commons-codec__version>
+		<m:dependency.management__org.junit.jupiter__junit-jupiter-params__version>5.5.2</m:dependency.management__org.junit.jupiter__junit-jupiter-params__version>
+		<m:dependency.management__io.dropwizard.metrics__metrics-core__version>3.2.2</m:dependency.management__io.dropwizard.metrics__metrics-core__version>
+		<m:dependency.management__org.testcontainers__testcontainers__version>1.12.4</m:dependency.management__org.testcontainers__testcontainers__version>
+		<m:properties__elasticsearch6.docker.version>6.6.0</m:properties__elasticsearch6.docker.version>
+		<m:dependency.management__net.oneandone.reflections8__reflections8__version>0.11.7</m:dependency.management__net.oneandone.reflections8__reflections8__version>
+		<m:properties__junit.version>5.5.2</m:properties__junit.version>
+		<m:dependency.management__commons-collections__commons-collections__version>3.2.2</m:dependency.management__commons-collections__commons-collections__version>
+		<m:dependency.management__ch.qos.logback__logback-classic__version>1.1.3</m:dependency.management__ch.qos.logback__logback-classic__version>
+		<m:properties__test.excluded.groups>MEMORY_TESTS,PERFORMANCE_TESTS,BRITTLE_TESTS</m:properties__test.excluded.groups>
+		<m:dependency.management__io.dropwizard.metrics__metrics-ganglia__version>3.2.2</m:dependency.management__io.dropwizard.metrics__metrics-ganglia__version>
+		<m:properties__asm4.version>4.0</m:properties__asm4.version>
+		<m:dependency.management__org.apache.commons__commons-math3__version>3.2</m:dependency.management__org.apache.commons__commons-math3__version>
+		<m:dependency.management__org.jacoco__org.jacoco.ant__version>0.8.5</m:dependency.management__org.jacoco__org.jacoco.ant__version>
+		<m:dependency.management__org.jboss.logging__jboss-logging__version>3.1.2.GA</m:dependency.management__org.jboss.logging__jboss-logging__version>
+		<m:dependency.management__io.netty__netty-all__version>4.1.45.Final</m:dependency.management__io.netty__netty-all__version>
+		<m:properties__lucene-solr.version>7.7.2</m:properties__lucene-solr.version>
+		<m:dependency.management__org.codehaus.jackson__jackson-xc__version>1.9.13</m:dependency.management__org.codehaus.jackson__jackson-xc__version>
+		<m:properties__junit-platform.version>1.5.2</m:properties__junit-platform.version>
+		<m:dependency.management__commons-logging__commons-logging__version>1.1.1</m:dependency.management__commons-logging__commons-logging__version>
+		<m:properties__kuali.s3.wagon.version>1.1.20</m:properties__kuali.s3.wagon.version>
+		<m:dependency.management__org.apache.tinkerpop__spark-gremlin__exclusion_1>org.eclipse.jetty.orbit__javax.servlet</m:dependency.management__org.apache.tinkerpop__spark-gremlin__exclusion_1>
+		<m:dependency.management__org.junit.jupiter__junit-jupiter-engine__version>5.5.2</m:dependency.management__org.junit.jupiter__junit-jupiter-engine__version>
+		<m:properties__project.reporting.outputEncoding>UTF-8</m:properties__project.reporting.outputEncoding>
+		<m:dependency.management__org.apache.tinkerpop__spark-gremlin__exclusion_0>com.thoughtworks.paranamer__paranamer</m:dependency.management__org.apache.tinkerpop__spark-gremlin__exclusion_0>
+		<m:properties__mockito.version>2.23.0</m:properties__mockito.version>
+		<m:dependency.management__com.googlecode.concurrentlinkedhashmap__concurrentlinkedhashmap-lru__version>1.3</m:dependency.management__com.googlecode.concurrentlinkedhashmap__concurrentlinkedhashmap-lru__version>
+		<m:dependency.management__org.apache.httpcomponents__httpcore-nio__version>4.4.12</m:dependency.management__org.apache.httpcomponents__httpcore-nio__version>
+		<m:properties__httpcomponents.httpcore.version>4.4.12</m:properties__httpcomponents.httpcore.version>
+		<m:dependency.management__antlr__antlr__version>2.7.7</m:dependency.management__antlr__antlr__version>
+		<m:properties__httpcomponents.httpclient.version>4.5.10</m:properties__httpcomponents.httpclient.version>
+		<m:dependency.management__org.mockito__mockito-core__version>2.23.0</m:dependency.management__org.mockito__mockito-core__version>
+		<m:properties__bigtable.version>1.14.0</m:properties__bigtable.version>
+		<m:dependency.management__org.javassist__javassist__version>3.18.0-GA</m:dependency.management__org.javassist__javassist__version>
+		<m:properties__easymock.version>3.4</m:properties__easymock.version>
+		<m:dependency.management__org.apache.tinkerpop__gremlin-core__version>3.4.6</m:dependency.management__org.apache.tinkerpop__gremlin-core__version>
+		<m:dependency.management__org.elasticsearch.client__elasticsearch-rest-client__version>7.6.2</m:dependency.management__org.elasticsearch.client__elasticsearch-rest-client__version>
+		<m:dependency.management__com.clearspring.analytics__stream__version>2.7.0</m:dependency.management__com.clearspring.analytics__stream__version>
+		<m:dependency.management__jdk.tools__jdk.tools__version>1.8</m:dependency.management__jdk.tools__jdk.tools__version>
+		<m:properties__elasticsearch.docker.image>docker.elastic.co/elasticsearch/elasticsearch</m:properties__elasticsearch.docker.image>
+		<m:dependency.management__org.apache.zookeeper__zookeeper__version>3.4.6</m:dependency.management__org.apache.zookeeper__zookeeper__version>
+		<m:properties__hadoop2.version>2.7.7</m:properties__hadoop2.version>
+		<m:dependency.management__org.apache.tinkerpop__tinkergraph-gremlin__version>3.4.6</m:dependency.management__org.apache.tinkerpop__tinkergraph-gremlin__version>
+		<m:dependency.management__org.apache.tinkerpop__gremlin-server__version>3.4.6</m:dependency.management__org.apache.tinkerpop__gremlin-server__version>
+		<m:dependency.management__org.apache.tinkerpop__gremlin-driver__version>3.4.6</m:dependency.management__org.apache.tinkerpop__gremlin-driver__version>
+		<m:dependency.management__org.junit.jupiter__junit-jupiter-api__version>5.5.2</m:dependency.management__org.junit.jupiter__junit-jupiter-api__version>
+		<m:properties__elasticsearch60.docker.version>6.0.1</m:properties__elasticsearch60.docker.version>
+		<m:properties__netty4.version>4.1.45.Final</m:properties__netty4.version>
+		<m:dependency.management__org.apache.cassandra__cassandra-all__version>2.2.13</m:dependency.management__org.apache.cassandra__cassandra-all__version>
+		<m:properties__concurrentlinkedhashmap.version>1.3</m:properties__concurrentlinkedhashmap.version>
+		<m:dependency.management__org.antlr__antlr-master__version>3.2</m:dependency.management__org.antlr__antlr-master__version>
+		<m:dependency.management__log4j__log4j__version>1.2.16</m:dependency.management__log4j__log4j__version>
+		<m:dependency.management__org.apache.velocity__velocity__version>1.7</m:dependency.management__org.apache.velocity__velocity__version>
+		<m:properties__scylladb.version>1.7.1</m:properties__scylladb.version>
+		<m:dependency.management__org.apache.tinkerpop__gremlin-console__version>3.4.6</m:dependency.management__org.apache.tinkerpop__gremlin-console__version>
+		<m:properties__asm3.version>3.1</m:properties__asm3.version>
+		<m:dependency.management__io.dropwizard.metrics__metrics-graphite__version>3.2.2</m:dependency.management__io.dropwizard.metrics__metrics-graphite__version>
+		<m:dependency.management__org.locationtech.spatial4j__spatial4j__version>0.7</m:dependency.management__org.locationtech.spatial4j__spatial4j__version>
+		<m:properties__zookeeper.version>3.4.6</m:properties__zookeeper.version>
+		<m:dependency.management__org.mortbay.jetty__jetty__version>6.1.26</m:dependency.management__org.mortbay.jetty__jetty__version>
+		<m:dependency.management__org.testcontainers__junit-jupiter__version>1.12.4</m:dependency.management__org.testcontainers__junit-jupiter__version>
+		<m:properties__jackson1.version>1.9.13</m:properties__jackson1.version>
+		<m:dependency.management__org.antlr__antlr-runtime__version>3.2</m:dependency.management__org.antlr__antlr-runtime__version>
+		<m:dependency.management__org.easymock__easymock__version>3.4</m:dependency.management__org.easymock__easymock__version>
+		<m:dependency.management__com.carrotsearch__hppc__version>0.7.1</m:dependency.management__com.carrotsearch__hppc__version>
+		<e:sbtTransformHash>958422952ea71192116544a77c03a602dfd222bc</e:sbtTransformHash>
+		<m:dependency.management__org.antlr__antlr__version>3.2</m:dependency.management__org.antlr__antlr__version>
+		<m:maven.plugins>org.apache.maven.plugins__maven-enforcer-plugin__3.0.0-M2|null__maven-release-plugin__null|org.apache.rat__apache-rat-plugin__0.13|org.apache.maven.plugins__maven-enforcer-plugin__3.0.0-M2|null__maven-release-plugin__null|org.apache.rat__apache-rat-plugin__0.13|null__maven-jar-plugin__null|null__maven-surefire-plugin__null</m:maven.plugins>
+		<m:properties__testcontainers.version>1.12.4</m:properties__testcontainers.version>
+		<m:properties__maven.javadoc.version>2.10.4</m:properties__maven.javadoc.version>
+		<m:dependency.management__org.testcontainers__cassandra__version>1.12.4</m:dependency.management__org.testcontainers__cassandra__version>
+		<m:dependency.management__com.google.protobuf__protobuf-java__version>2.5.0</m:dependency.management__com.google.protobuf__protobuf-java__version>
+		<m:dependency.management__com.google.guava__guava__version>18.0</m:dependency.management__com.google.guava__guava__version>
+		<m:dependency.management__commons-lang__commons-lang__version>2.5</m:dependency.management__commons-lang__commons-lang__version>
+		<m:dependency.management__org.apache.commons__commons-math__version>2.2</m:dependency.management__org.apache.commons__commons-math__version>
+		<m:dependency.management__org.locationtech.jts__jts-core__version>1.16.1</m:dependency.management__org.locationtech.jts__jts-core__version>
+		<m:dependency.management__org.apache.tinkerpop__spark-gremlin__version>3.4.6</m:dependency.management__org.apache.tinkerpop__spark-gremlin__version>
+		<m:dependency.management__com.fasterxml.jackson.module__jackson-module-scala_2.11__version>2.10.3</m:dependency.management__com.fasterxml.jackson.module__jackson-module-scala_2.11__version>
+		<m:dependency.management__io.dropwizard.metrics__metrics-jvm__version>3.2.2</m:dependency.management__io.dropwizard.metrics__metrics-jvm__version>
+		<m:properties__mrunit.version>1.1.0</m:properties__mrunit.version>
+		<m:properties__test.skip.default>false</m:properties__test.skip.default>
+		<m:dependency.management__org.mockito__mockito-inline__version>2.23.0</m:dependency.management__org.mockito__mockito-inline__version>
+		<m:properties__dependency.locations.enabled>false</m:properties__dependency.locations.enabled>
+		<m:properties__compiler.source>1.8</m:properties__compiler.source>
+		<m:dependency.management__org.codehaus.jackson__jackson-jaxrs__version>1.9.13</m:dependency.management__org.codehaus.jackson__jackson-jaxrs__version>
+		<m:dependency.management__org.jboss.netty__netty__version>3.2.7.Final</m:dependency.management__org.jboss.netty__netty__version>
+		<m:dependency.management__org.junit.vintage__junit-vintage-engine__version>5.5.2</m:dependency.management__org.junit.vintage__junit-vintage-engine__version>
+		<m:dependency.management__org.junit.platform__junit-platform-runner__version>1.5.2</m:dependency.management__org.junit.platform__junit-platform-runner__version>
+		<m:dependency.management__org.apache.httpcomponents__httpclient__version>4.5.10</m:dependency.management__org.apache.httpcomponents__httpclient__version>
+		<m:dependency.management__it.unimi.dsi__fastutil__version>6.5.7</m:dependency.management__it.unimi.dsi__fastutil__version>
+		<m:properties__janusgraph.testdir>${project.build.directory}/janusgraph-test</m:properties__janusgraph.testdir>
+		<m:dependency.management__net.jpountz.lz4__lz4__version>1.3.0</m:dependency.management__net.jpountz.lz4__lz4__version>
+		<m:dependency.management__org.objenesis__objenesis__version>2.1</m:dependency.management__org.objenesis__objenesis__version>
+		<m:dependency.management__org.apache.thrift__libthrift__version>0.9.2</m:dependency.management__org.apache.thrift__libthrift__version>
+		<m:dependency.management__org.apache.ant__ant__version>1.8.3</m:dependency.management__org.apache.ant__ant__version>
+		<m:properties__antlr.version>3.2</m:properties__antlr.version>
+		<m:dependency.management__com.carrotsearch.randomizedtesting__randomizedtesting-runner__version>2.7.2</m:dependency.management__com.carrotsearch.randomizedtesting__randomizedtesting-runner__version>
+		<m:dependency.management__com.fasterxml.jackson.datatype__jackson-datatype-json-org__version>2.10.3</m:dependency.management__com.fasterxml.jackson.datatype__jackson-datatype-json-org__version>
+		<m:dependency.management__org.slf4j__slf4j-api__version>1.7.12</m:dependency.management__org.slf4j__slf4j-api__version>
+		<m:dependency.management__org.slf4j__slf4j-log4j12__version>1.7.12</m:dependency.management__org.slf4j__slf4j-log4j12__version>
+		<m:dependency.management__commons-cli__commons-cli__version>1.3.1</m:dependency.management__commons-cli__commons-cli__version>
+		<m:dependency.management__org.apache.commons__commons-lang3__version>3.3.1</m:dependency.management__org.apache.commons__commons-lang3__version>
+		<m:properties__titan.compatible-versions>1.0.0,1.1.0-SNAPSHOT</m:properties__titan.compatible-versions>
+		<m:properties__jasper.version>5.5.23</m:properties__jasper.version>
+		<m:dependency.management__org.yaml__snakeyaml__version>1.11</m:dependency.management__org.yaml__snakeyaml__version>
+		<m:properties__hbase.server.version>1.4.10</m:properties__hbase.server.version>
+		<m:dependency.management__org.apache.avro__avro__version>1.7.4</m:dependency.management__org.apache.avro__avro__version>
+		<m:properties__hbase2.version>2.1.5</m:properties__hbase2.version>
+		<m:properties__slf4j.version>1.7.12</m:properties__slf4j.version>
+		<m:dependency.management__com.boundary__high-scale-lib__version>1.0.6</m:dependency.management__com.boundary__high-scale-lib__version>
+		<m:dependency.management__io.netty__netty__version>3.10.5.Final</m:dependency.management__io.netty__netty__version>
+		<m:properties__gpg.skip>false</m:properties__gpg.skip>
+		<m:properties__tinkerpop.version>3.4.6</m:properties__tinkerpop.version>
+		<m:properties__mem.jvm.opts>-Xms256m -Xmx256m -ea -XX:+HeapDumpOnOutOfMemoryError ${test.extra.jvm.opts}</m:properties__mem.jvm.opts>
+		<m:dependency.management__commons-beanutils__commons-beanutils__version>1.7.0</m:dependency.management__commons-beanutils__commons-beanutils__version>
+		<m:dependency.management__xml-apis__xml-apis__version>1.3.04</m:dependency.management__xml-apis__xml-apis__version>
+		<m:dependency.management__com.fasterxml.jackson.core__jackson-annotations__version>2.10.3</m:dependency.management__com.fasterxml.jackson.core__jackson-annotations__version>
+		<m:dependency.management__org.mockito__mockito-junit-jupiter__version>2.23.0</m:dependency.management__org.mockito__mockito-junit-jupiter__version>
+		<m:dependency.management__org.codehaus.jackson__jackson-core-asl__version>1.9.13</m:dependency.management__org.codehaus.jackson__jackson-core-asl__version>
+		<m:dependency.management__com.fasterxml.jackson.core__jackson-core__version>2.10.3</m:dependency.management__com.fasterxml.jackson.core__jackson-core__version>
+		<m:dependency.management__org.apache.cassandra__cassandra-thrift__version>2.2.13</m:dependency.management__org.apache.cassandra__cassandra-thrift__version>
+		<m:dependency.management__com.fasterxml.jackson.core__jackson-databind__version>2.10.3</m:dependency.management__com.fasterxml.jackson.core__jackson-databind__version>
+		<m:properties__elasticsearch.docker.version>${elasticsearch7.docker.version}</m:properties__elasticsearch.docker.version>
+		<m:properties__skip.es.test>${skipTests}</m:properties__skip.es.test>
+		<m:dependency.management__commons-httpclient__commons-httpclient__version>3.1</m:dependency.management__commons-httpclient__commons-httpclient__version>
+		<m:dependency.management__commons-net__commons-net__version>1.4.1</m:dependency.management__commons-net__commons-net__version>
+		<m:dependency.management__commons-io__commons-io__version>2.3</m:dependency.management__commons-io__commons-io__version>
+		<m:dependency.management__org.junit.platform__junit-platform-launcher__version>1.5.2</m:dependency.management__org.junit.platform__junit-platform-launcher__version>
+		<m:dependency.management__com.googlecode.json-simple__json-simple__version>1.1.1</m:dependency.management__com.googlecode.json-simple__json-simple__version>
+		<m:dependency.management__javax.xml.bind__jaxb-api__version>2.2.2</m:dependency.management__javax.xml.bind__jaxb-api__version>
+		<m:properties__metrics.version>3.2.2</m:properties__metrics.version>
+		<m:dependency.management__io.netty__netty-handler__version>4.1.45.Final</m:dependency.management__io.netty__netty-handler__version>
+		<m:dependency.management__org.apache.httpcomponents__httpcore__version>4.4.12</m:dependency.management__org.apache.httpcomponents__httpcore__version>
+		<m:dependency.management__org.apache.tinkerpop__gremlin-groovy__version>3.4.6</m:dependency.management__org.apache.tinkerpop__gremlin-groovy__version>
+		<m:dependency.management__org.testcontainers__elasticsearch__version>1.12.4</m:dependency.management__org.testcontainers__elasticsearch__version>
+		<m:properties__top.level.basedir>${basedir}/..</m:properties__top.level.basedir>
+		<m:properties__default.test.jvm.opts>-Xms256m -Xmx768m -XX:+HeapDumpOnOutOfMemoryError -ea ${test.extra.jvm.opts}</m:properties__default.test.jvm.opts>
+		<m:dependency.management__org.codehaus.jackson__jackson-mapper-asl__version>1.9.13</m:dependency.management__org.codehaus.jackson__jackson-mapper-asl__version>
+		<m:properties__elasticsearch7.docker.version>7.6.2</m:properties__elasticsearch7.docker.version>
+		<m:properties__jna.version>4.0.0</m:properties__jna.version>
+		<m:dependency.management__org.apache.tinkerpop__gremlin-test__version>3.4.6</m:dependency.management__org.apache.tinkerpop__gremlin-test__version>
+		<m:dependency.management__com.carrotsearch__junit-benchmarks__version>0.7.0</m:dependency.management__com.carrotsearch__junit-benchmarks__version>
+		<m:properties__commons.beanutils.version>1.7.0</m:properties__commons.beanutils.version>
+		<m:dependency.management__org.xerial.snappy__snappy-java__version>1.0.5-M3</m:dependency.management__org.xerial.snappy__snappy-java__version>
+		<m:properties__joda.version>2.8.2</m:properties__joda.version>
+		<m:properties__hbase1.version>1.4.10</m:properties__hbase1.version>
+		<m:properties__jackson2.version>2.10.3</m:properties__jackson2.version>
+		<m:properties__elasticsearch.version>7.6.2</m:properties__elasticsearch.version>
+		<m:dependency.management__org.testcontainers__testcontainers__exclusion_0>net.java.dev.jna__jna</m:dependency.management__org.testcontainers__testcontainers__exclusion_0>
+		<m:properties__compiler.target>1.8</m:properties__compiler.target>
+		<m:properties__antlr2.version>2.7.7</m:properties__antlr2.version>
+		<m:properties__project.build.sourceEncoding>UTF-8</m:properties__project.build.sourceEncoding>
+		<m:properties__maven.gpg.version>1.6</m:properties__maven.gpg.version>
+		<m:properties__cassandra.version>2.2.13</m:properties__cassandra.version>
+		<m:properties__test.skip.tp>true</m:properties__test.skip.tp>
+		<m:dependency.management__org.apache.tinkerpop__hadoop-gremlin__version>3.4.6</m:dependency.management__org.apache.tinkerpop__hadoop-gremlin__version>
+		<m:dependency.management__commons-configuration__commons-configuration__version>1.10</m:dependency.management__commons-configuration__commons-configuration__version>
+		<m:properties__cassandra-driver.version>3.9.0</m:properties__cassandra-driver.version>
+		<m:dependency.management__javax.servlet__servlet-api__version>2.5</m:dependency.management__javax.servlet__servlet-api__version>
+		<m:properties__commons.collections.version>3.2.2</m:properties__commons.collections.version>
+		<m:properties__jamm.version>0.3.0</m:properties__jamm.version>
+		<m:dependency.management__javax.validation__validation-api__version>1.1.0.Final</m:dependency.management__javax.validation__validation-api__version>
+		<m:dependency.management__joda-time__joda-time__version>2.8.2</m:dependency.management__joda-time__joda-time__version>
+		<m:dependency.management__com.google.code.findbugs__jsr305__version>3.0.2</m:dependency.management__com.google.code.findbugs__jsr305__version>
+		<m:dependency.management__commons-beanutils__commons-beanutils-core__version>1.7.0</m:dependency.management__commons-beanutils__commons-beanutils-core__version>
+		<m:dependency.management__org.testcontainers__cassandra__exclusion_0>com.datastax.cassandra__cassandra-driver-core</m:dependency.management__org.testcontainers__cassandra__exclusion_0>
+		<m:properties__gmavenplus.version>1.5</m:properties__gmavenplus.version>
+	</info>
+	<configurations>
+		<conf name="default" visibility="public" description="runtime dependencies and master artifact can be used with this conf" extends="runtime,master"/>
+		<conf name="master" visibility="public" description="contains only the artifact published by this module itself, with no transitive dependencies"/>
+		<conf name="compile" visibility="public" description="this is the default scope, used if none is specified. Compile dependencies are available in all classpaths."/>
+		<conf name="provided" visibility="public" description="this is much like compile, but indicates you expect the JDK or a container to provide it. It is only available on the compilation classpath, and is not transitive."/>
+		<conf name="runtime" visibility="public" description="this scope indicates that the dependency is not required for compilation, but is for execution. It is in the runtime and test classpaths, but not the compile classpath." extends="compile"/>
+		<conf name="test" visibility="private" description="this scope indicates that the dependency is not required for normal use of the application, and is only available for the test compilation and execution phases." extends="runtime"/>
+		<conf name="system" visibility="public" description="this scope is similar to provided except that you have to provide the JAR which contains it explicitly. The artifact is always available and is not looked up in a repository."/>
+		<conf name="sources" visibility="public" description="this configuration contains the source artifact of this module, if any."/>
+		<conf name="javadoc" visibility="public" description="this configuration contains the javadoc artifact of this module, if any."/>
+		<conf name="optional" visibility="public" description="contains all optional dependencies"/>
+	</configurations>
+	<publications>
+		<artifact name="janusgraph-es" type="jar" ext="jar" conf="master"/>
+	</publications>
+	<dependencies>
+		<dependency org="org.janusgraph" name="janusgraph-core" rev="0.5.2" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="org.janusgraph" name="janusgraph-backend-testutils" rev="0.5.2" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.janusgraph" name="janusgraph-inmemory" rev="0.5.2" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.janusgraph" name="janusgraph-berkeleyje" rev="0.5.2" force="true" conf="test->runtime(*),master(compile)">
+			<artifact name="janusgraph-berkeleyje" type="jar" ext="jar" conf="test"/>
+			<artifact name="janusgraph-berkeleyje" type="jar" ext="jar" conf="test" m:classifier="tests"/>
+		</dependency>
+		<dependency org="org.janusgraph" name="janusgraph-cql" rev="0.5.2" force="true" conf="test->runtime(*),master(compile)">
+			<artifact name="janusgraph-cql" type="jar" ext="jar" conf="test"/>
+			<artifact name="janusgraph-cql" type="jar" ext="jar" conf="test" m:classifier="tests"/>
+		</dependency>
+		<dependency org="org.elasticsearch.client" name="elasticsearch-rest-client" rev="7.6.2" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="org.slf4j" name="slf4j-log4j12" rev="1.7.12" force="true" conf="optional->compile(*),master(compile),provided(*)"/>
+		<dependency org="ch.qos.logback" name="logback-classic" rev="1.1.3" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="org.mockito" name="mockito-inline" rev="2.23.0" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="net.java.dev.jna" name="jna" rev="4.0.0" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.testcontainers" name="testcontainers" rev="1.12.4" force="true" conf="test->runtime(*),master(compile)">
+			<exclude org="net.java.dev.jna" module="jna" name="*" type="*" ext="*" conf="" matcher="exact"/>
+		</dependency>
+		<dependency org="org.testcontainers" name="cassandra" rev="1.12.4" force="true" conf="test->runtime(*),master(compile)">
+			<exclude org="com.datastax.cassandra" module="cassandra-driver-core" name="*" type="*" ext="*" conf="" matcher="exact"/>
+		</dependency>
+		<dependency org="org.testcontainers" name="elasticsearch" rev="1.12.4" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.testcontainers" name="junit-jupiter" rev="1.12.4" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="com.googlecode.json-simple" name="json-simple" rev="1.1.1" force="true" conf="test->runtime(*),master(compile)">
+			<exclude org="junit" module="junit" name="*" type="*" ext="*" conf="" matcher="exact"/>
+		</dependency>
+		<dependency org="org.slf4j" name="slf4j-api" rev="1.7.12" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="log4j" name="log4j" rev="1.2.16" force="true" conf="optional->compile(*),provided(*),master(compile)"/>
+	</dependencies>
+</ivy-module>
