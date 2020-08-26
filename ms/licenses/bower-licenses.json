@@ -1,0 +1,376 @@
+{
+  "angular-clipboard@1.7.0": {
+    "licenses": [
+      "MIT"
+    ]
+  },
+  "angular-highlightjs@0.7.1": {
+    "licenses": [
+      "MIT*"
+    ]
+  },
+  "angular-markdown-editor-ghiscoding@1.1.5": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/ghiscoding/angular-markdown-editor",
+    "homepage": "https://github.com/ghiscoding/angular-markdown-editor"
+  },
+  "angular-drag-and-drop-lists@2.1.0": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "https://github.com/marceljuenemann/angular-drag-and-drop-lists"
+  },
+  "angular-qr@0.2.0": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/janantala/angular-qr.git"
+    },
+    "homepage": "https://github.com/janantala/angular-qr"
+  },
+  "angular-scroll@1.0.0": {
+    "licenses": [
+      "MIT*"
+    ]
+  },
+  "angular-ui-router@0.4.3": {
+    "licenses": [
+      "MIT"
+    ]
+  },
+  "angular-ui-ace@0.2.3": {
+    "licenses": "UNKNOWN"
+  },
+  "angular-ui-sortable@0.19.0": {
+    "licenses": "UNKNOWN"
+  },
+  "animate.css@3.7.2": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/daneden/animate.css"
+  },
+  "c3@undefined": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "https://github.com/masayuki0812/c3"
+  },
+  "cryptojslib@3.1.2": {
+    "licenses": "UNKNOWN",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/sytelus/cryptojs.git"
+    },
+    "homepage": "https://github.com/sytelus/cryptojs"
+  },
+  "dropzone@4.3.0": {
+    "licenses": "UNKNOWN",
+    "homepage": "http://www.dropzonejs.com"
+  },
+  "d3@undefined": {
+    "licenses": [
+      "BSD-3-Clause",
+      "MIT*"
+    ]
+  },
+  "file-saver@1.3.3": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "https://github.com/eligrey/FileSaver.js"
+  },
+  "font-awesome@undefined": {
+    "licenses": [
+      "OFL-1.1",
+      "MIT",
+      "CC-BY-3.0"
+    ],
+    "homepage": "http://fontawesome.io"
+  },
+  "js-base64@2.6.4": {
+    "licenses": [
+      "BSD-3-Clause"
+    ]
+  },
+  "js-url@undefined": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "https://github.com/websanova/js-url"
+  },
+  "jquery@undefined": {
+    "licenses": [
+      "MIT"
+    ]
+  },
+  "ng-file-upload@undefined": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "https://github.com/danialfarid/ng-file-upload"
+  },
+  "ng-tags-input@3.2.0": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "http://mbenford.github.io/ngTagsInput"
+  },
+  "moment@undefined": {
+    "licenses": [
+      "MIT"
+    ]
+  },
+  "ng-file-upload-shim@undefined": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "https://github.com/danialfarid/ng-file-upload"
+  },
+  "qrcode.js@1.0.2": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/janantala/qrcode.js.git"
+    },
+    "homepage": "https://github.com/janantala/qrcode.js"
+  },
+  "underscore@undefined": {
+    "licenses": [
+      "MIT*"
+    ]
+  },
+  "angular-bootstrap@2.5.0": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/angular-ui/bootstrap"
+  },
+  "angular@1.7.8": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/angular/angular.js"
+  },
+  "angular-animate@1.7.8": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/angular/angular.js"
+  },
+  "angular-bootstrap-colorpicker@3.0.32": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/buberdds/angular-bootstrap-colorpicker"
+  },
+  "ace-builds@1.4.12": {
+    "licenses": [
+      "BSD",
+      "BSD-3-Clause",
+      "MIT*"
+    ],
+    "repository": "https://github.com/ajaxorg/ace-builds",
+    "homepage": "https://github.com/ajaxorg/ace-builds"
+  },
+  "angular-cookies@1.7.8": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/angular/angular.js"
+  },
+  "angular-bootstrap-multiselect@1.1.11": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "http://bentorfs.github.io/angular-bootstrap-multiselect/",
+    "repository": "https://github.com/bentorfs/angular-bootstrap-multiselect"
+  },
+  "angular-marked@1.2.2": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/Hypercubed/angular-marked"
+  },
+  "angular-images-resizer@2.0.3": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "https://github.com/FBerthelot/angular-images-resizer",
+    "repository": "https://github.com/FBerthelot/angular-images-resizer"
+  },
+  "angular-messages@1.7.8": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/angular/angular.js"
+  },
+  "angular-page-loader@1.0.2": {
+    "licenses": [
+      "ISC"
+    ],
+    "homepage": "https://github.com/codekraft-studio/angular-page-loader",
+    "repository": "https://github.com/codekraft-studio/angular-loader"
+  },
+  "angular-moment@0.10.3": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/urish/angular-moment",
+    "homepage": "http://github.com/urish/angular-moment"
+  },
+  "angular-sanitize@1.7.8": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/angular/angular.js"
+  },
+  "angular-touch@1.7.8": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/angular/angular.js"
+  },
+  "angular-timer@1.3.5": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/siddii/angular-timer",
+    "homepage": "https://github.com/siddii/angular-timer"
+  },
+  "angular-mocks@1.7.8": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/angular/angular.js"
+  },
+  "angular-resource@1.7.8": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/angular/angular.js"
+  },
+  "css-spaces@0.3.5": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "http://badabam.github.io/css-spaces/",
+    "repository": "https://github.com/badabam/css-spaces"
+  },
+  "bootstrap-markdown@2.10.0": {
+    "licenses": [
+      "Apache-2.0",
+      "Apache*"
+    ],
+    "repository": "https://github.com/toopay/bootstrap-markdown"
+  },
+  "angular-base64-upload@v0.1.23": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "https://github.com/adonespitogo/angular-base64-upload",
+    "repository": "https://github.com/adonespitogo/angular-base64-upload"
+  },
+  "angular-local-storage@0.7.1": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "http://gregpike.net/demos/angular-local-storage/demo.html",
+    "repository": "https://github.com/grevory/angular-local-storage"
+  },
+  "angular-ui-notification@0.3.6": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/alexcrack/angular-ui-notification",
+    "homepage": "https://github.com/alexcrack/angular-ui-notification"
+  },
+  "bootstrap-sass@3.4.1": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "https://github.com/twbs/bootstrap-sass",
+    "repository": "https://github.com/twbs/bootstrap-sass"
+  },
+  "es5-shim@4.5.14": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/es-shims/es5-shim",
+    "homepage": "https://github.com/es-shims/es5-shim"
+  },
+  "bootstrap@3.4.1": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "https://getbootstrap.com/",
+    "repository": "https://github.com/twbs/bootstrap"
+  },
+  "humanize-duration@3.10.1": {
+    "licenses": [
+      "Unlicense"
+    ],
+    "repository": "https://github.com/EvanHahn/HumanizeDuration.js",
+    "homepage": "https://github.com/EvanHahn/HumanizeDuration.js"
+  },
+  "jquery-ui@1.12.1": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/components/jqueryui"
+  },
+  "ng-csv@0.3.6": {
+    "licenses": [
+      "MIT*"
+    ],
+    "repository": "https://github.com/asafdav/ng-csv"
+  },
+  "roboto-fontface@0.10.0": {
+    "licenses": [
+      "Apache-2.0",
+      "Apache*"
+    ],
+    "repository": "https://github.com/choffmeister/roboto-fontface-bower"
+  },
+  "es6-shim@0.35.5": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/paulmillr/es6-shim"
+  },
+  "marked@0.3.19": {
+    "licenses": [
+      "MIT"
+    ],
+    "homepage": "https://github.com/markedjs/marked",
+    "repository": "https://github.com/markedjs/marked"
+  },
+  "smalot-bootstrap-datetimepicker@2.4.4": {
+    "licenses": [
+      "Apache 2.0",
+      "Apache*"
+    ],
+    "repository": "https://github.com/smalot/bootstrap-datetimepicker"
+  },
+  "underscore.string@3.3.4": {
+    "licenses": [
+      "MIT"
+    ],
+    "repository": "https://github.com/epeli/underscore.string",
+    "homepage": "http://epeli.github.com/underscore.string/"
+  },
+  "highlight.js.origin@9.18.1": {
+    "licenses": [
+      "BSD-3-Clause",
+      "MIT*"
+    ],
+    "homepage": "https://github.com/isagalaev/highlight.js",
+    "repository": "https://github.com/highlightjs/highlight.js"
+  }
+}

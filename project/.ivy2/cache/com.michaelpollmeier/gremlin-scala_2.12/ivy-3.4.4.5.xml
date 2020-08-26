@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven" xmlns:e="http://ant.apache.org/ivy/extra">
+	<info organisation="com.michaelpollmeier"
+		module="gremlin-scala_2.12"
+		revision="3.4.4.5"
+		status="release"
+		publication="20200129202313"
+	>
+		<license name="Apache-2.0" url="https://www.apache.org/licenses/LICENSE-2.0.html" />
+		<description homepage="https://github.com/mpollmeier/gremlin-scala">
+		gremlin-scala
+		</description>
+		<e:sbtTransformHash>7ff4242e7fc6f2c818e38cbc584d2d88ff283a59</e:sbtTransformHash>
+	</info>
+	<configurations>
+		<conf name="default" visibility="public" description="runtime dependencies and master artifact can be used with this conf" extends="runtime,master"/>
+		<conf name="master" visibility="public" description="contains only the artifact published by this module itself, with no transitive dependencies"/>
+		<conf name="compile" visibility="public" description="this is the default scope, used if none is specified. Compile dependencies are available in all classpaths."/>
+		<conf name="provided" visibility="public" description="this is much like compile, but indicates you expect the JDK or a container to provide it. It is only available on the compilation classpath, and is not transitive."/>
+		<conf name="runtime" visibility="public" description="this scope indicates that the dependency is not required for compilation, but is for execution. It is in the runtime and test classpaths, but not the compile classpath." extends="compile"/>
+		<conf name="test" visibility="private" description="this scope indicates that the dependency is not required for normal use of the application, and is only available for the test compilation and execution phases." extends="runtime"/>
+		<conf name="system" visibility="public" description="this scope is similar to provided except that you have to provide the JAR which contains it explicitly. The artifact is always available and is not looked up in a repository."/>
+		<conf name="sources" visibility="public" description="this configuration contains the source artifact of this module, if any."/>
+		<conf name="javadoc" visibility="public" description="this configuration contains the javadoc artifact of this module, if any."/>
+		<conf name="optional" visibility="public" description="contains all optional dependencies"/>
+	</configurations>
+	<publications>
+		<artifact name="gremlin-scala_2.12" type="jar" ext="jar" conf="master"/>
+	</publications>
+	<dependencies>
+		<dependency org="org.scala-lang" name="scala-library" rev="2.12.8" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="com.michaelpollmeier" name="macros_2.12" rev="3.4.4.5" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="org.apache.tinkerpop" name="gremlin-core" rev="3.4.4" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="com.chuusai" name="shapeless_2.12" rev="2.3.3" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="org.slf4j" name="slf4j-nop" rev="1.7.25" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.apache.tinkerpop" name="tinkergraph-gremlin" rev="3.4.4" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.apache.tinkerpop" name="gremlin-test" rev="3.4.4" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.scalatest" name="scalatest_2.12" rev="3.0.8" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.scalamock" name="scalamock_2.12" rev="4.3.0" force="true" conf="test->runtime(*),master(compile)"/>
+	</dependencies>
+</ivy-module>

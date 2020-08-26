@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.thehive-project</groupId>
+    <artifactId>sbt-github-changelog</artifactId>
+    <packaging>jar</packaging>
+    <description>SBT plugin to generate change log file from github milestones</description>
+    <url>https://github.com/TheHive-Project/sbt-github-changelog</url>
+    <version>0.3.0</version>
+    <licenses>
+        <license>
+            <name>Apache-2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <name>sbt-github-changelog</name>
+    <organization>
+        <name>TheHive project</name>
+        <url>http://thehive-project.org/</url>
+    </organization>
+    <scm>
+        <url>https://github.com/TheHive-Project/sbt-github-changelog</url>
+        <connection>scm:git@github.com:TheHive-Project/sbt-github-changelog.git</connection>
+    </scm>
+    <developers>
+        <developer>
+            <id>toom</id>
+            <name>Thomas</name>
+            <url>https://github.com/To-om</url>
+            <email>thomas@thehive-project.org</email>
+        </developer>
+    </developers>
+    <properties>
+        <scalaVersion>2.12</scalaVersion>
+        <sbtVersion>1.0</sbtVersion>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.12.10</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-sbt</groupId>
+            <artifactId>sbt</artifactId>
+            <version>1.3.9</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.softwaremill.sttp.client</groupId>
+            <artifactId>core_2.12</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.softwaremill.sttp.client</groupId>
+            <artifactId>play-json_2.12</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+    </dependencies>
+</project>

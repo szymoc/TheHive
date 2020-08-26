@@ -1,0 +1,25 @@
+{
+  "name": "roboto-fontface",
+  "description": "A simple package providing the Roboto fontface.",
+  "version": "0.10.0",
+  "main": [
+    "./css/roboto/roboto-fontface.css"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "homepage": "https://github.com/choffmeister/roboto-fontface-bower",
+  "_release": "0.10.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.10.0",
+    "commit": "b9b735663797fa0caa47aa98ec2577c97b211d14"
+  },
+  "_source": "https://github.com/choffmeister/roboto-fontface-bower.git",
+  "_target": "^0.10.0",
+  "_originalSource": "roboto-fontface"
+}

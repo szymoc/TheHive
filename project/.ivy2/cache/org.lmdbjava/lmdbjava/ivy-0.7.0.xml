@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven" xmlns:e="http://ant.apache.org/ivy/extra">
+	<info organisation="org.lmdbjava"
+		module="lmdbjava"
+		revision="0.7.0"
+		status="release"
+		publication="20190604050053"
+	>
+		<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt" />
+		<description homepage="">
+		Low latency Java API for the ultra-fast, embedded Symas Lightning Database (LMDB)
+		</description>
+		<m:dependency.management__junit__junit__version>4.12</m:dependency.management__junit__junit__version>
+		<m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__scope>provided</m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__scope>
+		<m:properties__maven.build.timestamp.format>yyyy-MM-dd&apos;T&apos;HH:mm:ss&apos;Z&apos;</m:properties__maven.build.timestamp.format>
+		<m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__exclusion_0>org.apache.maven__maven-artifact</m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__exclusion_0>
+		<m:dependency.management__com.google.code.findbugs__annotations__exclusion_0>com.google.code.findbugs__jsr305</m:dependency.management__com.google.code.findbugs__annotations__exclusion_0>
+		<m:properties__github.repo>lmdbjava</m:properties__github.repo>
+		<m:dependency.management__com.google.code.findbugs__annotations__exclusion_1>net.jcip__jcip-annotations</m:dependency.management__com.google.code.findbugs__annotations__exclusion_1>
+		<m:properties__pmd.version>6.15.0</m:properties__pmd.version>
+		<m:dependency.management__com.google.code.findbugs__jsr305__scope>provided</m:dependency.management__com.google.code.findbugs__jsr305__scope>
+		<m:properties__maven.enforcer.java>1.8</m:properties__maven.enforcer.java>
+		<m:dependency.management__org.hamcrest__hamcrest__version>2.1</m:dependency.management__org.hamcrest__hamcrest__version>
+		<m:properties__acegi.standard.resources.version>0.2.3</m:properties__acegi.standard.resources.version>
+		<m:dependency.management__org.apache.maven__maven-plugin-api__exclusion_0>org.eclipse.sisu__org.eclipse.sisu.plexus</m:dependency.management__org.apache.maven__maven-plugin-api__exclusion_0>
+		<m:dependency.management__com.google.code.findbugs__annotations__scope>provided</m:dependency.management__com.google.code.findbugs__annotations__scope>
+		<m:dependency.management__org.codehaus.plexus__plexus-utils__version>3.2.0</m:dependency.management__org.codehaus.plexus__plexus-utils__version>
+		<e:sbtTransformHash>1ed1c7b5312151451bb0473fcb8784d06c8f7288</e:sbtTransformHash>
+		<m:properties__maven.compiler.target>1.8</m:properties__maven.compiler.target>
+		<m:properties__trimStackTrace>false</m:properties__trimStackTrace>
+		<m:properties__github.global.server>github</m:properties__github.global.server>
+		<m:maven.plugins>null__maven-enforcer-plugin__null|null__maven-dependency-plugin__null|null__maven-checkstyle-plugin__null|null__maven-pmd-plugin__null|org.basepom.maven__duplicate-finder-maven-plugin__null|org.codehaus.mojo__versions-maven-plugin__null|org.codehaus.mojo__buildnumber-maven-plugin__null|org.jacoco__jacoco-maven-plugin__null|com.github.spotbugs__spotbugs-maven-plugin__null|au.com.acegi__xml-format-maven-plugin__null|org.codehaus.mojo__license-maven-plugin__null|null__maven-shade-plugin__null</m:maven.plugins>
+		<m:dependency.management__junit__junit__scope>test</m:dependency.management__junit__junit__scope>
+		<m:properties__license.licenseName>apache_v2</m:properties__license.licenseName>
+		<m:dependency.management__org.hamcrest__hamcrest__scope>test</m:dependency.management__org.hamcrest__hamcrest__scope>
+		<m:properties__pmd.ruleset>/au/com/acegi/standard/rule-set-pmd.xml</m:properties__pmd.ruleset>
+		<m:properties__github.org>lmdbjava</m:properties__github.org>
+		<m:properties__project.build.sourceEncoding>UTF-8</m:properties__project.build.sourceEncoding>
+		<m:dependency.management__org.apache.maven__maven-plugin-api__version>3.6.1</m:dependency.management__org.apache.maven__maven-plugin-api__version>
+		<m:dependency.management__com.google.code.findbugs__annotations__version>3.0.1u2</m:dependency.management__com.google.code.findbugs__annotations__version>
+		<m:properties__maven.enforcer.mvn>3.5.4</m:properties__maven.enforcer.mvn>
+		<m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__version>3.6.0</m:dependency.management__org.apache.maven.plugin-tools__maven-plugin-annotations__version>
+		<m:dependency.management__com.google.code.findbugs__jsr305__version>3.0.2</m:dependency.management__com.google.code.findbugs__jsr305__version>
+		<m:properties__maven.compiler.source>1.8</m:properties__maven.compiler.source>
+		<m:dependency.management__junit__junit__exclusion_0>org.hamcrest__hamcrest-core</m:dependency.management__junit__junit__exclusion_0>
+	</info>
+	<configurations>
+		<conf name="default" visibility="public" description="runtime dependencies and master artifact can be used with this conf" extends="runtime,master"/>
+		<conf name="master" visibility="public" description="contains only the artifact published by this module itself, with no transitive dependencies"/>
+		<conf name="compile" visibility="public" description="this is the default scope, used if none is specified. Compile dependencies are available in all classpaths."/>
+		<conf name="provided" visibility="public" description="this is much like compile, but indicates you expect the JDK or a container to provide it. It is only available on the compilation classpath, and is not transitive."/>
+		<conf name="runtime" visibility="public" description="this scope indicates that the dependency is not required for compilation, but is for execution. It is in the runtime and test classpaths, but not the compile classpath." extends="compile"/>
+		<conf name="test" visibility="private" description="this scope indicates that the dependency is not required for normal use of the application, and is only available for the test compilation and execution phases." extends="runtime"/>
+		<conf name="system" visibility="public" description="this scope is similar to provided except that you have to provide the JAR which contains it explicitly. The artifact is always available and is not looked up in a repository."/>
+		<conf name="sources" visibility="public" description="this configuration contains the source artifact of this module, if any."/>
+		<conf name="javadoc" visibility="public" description="this configuration contains the javadoc artifact of this module, if any."/>
+		<conf name="optional" visibility="public" description="contains all optional dependencies"/>
+	</configurations>
+	<publications>
+		<artifact name="lmdbjava" type="jar" ext="jar" conf="master"/>
+	</publications>
+	<dependencies>
+		<dependency org="junit" name="junit" rev="4.12" force="true" conf="test->runtime(*),master(compile)">
+			<exclude org="org.hamcrest" module="hamcrest-core" name="*" type="*" ext="*" conf="" matcher="exact"/>
+		</dependency>
+		<dependency org="org.hamcrest" name="hamcrest" rev="2.1" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="com.github.jnr" name="jnr-ffi" rev="2.1.9" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)">
+			<exclude org="com.github.jnr" module="jffi" name="*" type="*" ext="*" conf="" matcher="exact"/>
+		</dependency>
+		<dependency org="com.github.jnr" name="jffi" rev="1.2.18" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)">
+			<artifact name="jffi" type="jar" ext="jar" conf="compile,runtime"/>
+			<artifact name="jffi" type="jar" ext="jar" conf="compile,runtime" m:classifier="native"/>
+		</dependency>
+		<dependency org="com.github.jnr" name="jnr-constants" rev="0.9.12" force="true" conf="compile->compile(*),master(compile);runtime->runtime(*)"/>
+		<dependency org="com.jakewharton.byteunits" name="byteunits" rev="0.9.1" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.agrona" name="agrona" rev="1.0.1" force="true" conf="optional->compile(*),master(compile)"/>
+		<dependency org="io.netty" name="netty-all" rev="4.1.36.Final" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="com.google.guava" name="guava" rev="27.1-jre" force="true" conf="test->runtime(*),master(compile)">
+			<exclude org="com.google.code.findbugs" module="jsr305" name="*" type="*" ext="*" conf="" matcher="exact"/>
+			<exclude org="com.google.guava" module="failureaccess" name="*" type="*" ext="*" conf="" matcher="exact"/>
+			<exclude org="com.google.guava" module="listenablefuture" name="*" type="*" ext="*" conf="" matcher="exact"/>
+			<exclude org="org.checkerframework" module="checker-qual" name="*" type="*" ext="*" conf="" matcher="exact"/>
+			<exclude org="com.google.errorprone" module="error_prone_annotations" name="*" type="*" ext="*" conf="" matcher="exact"/>
+			<exclude org="com.google.j2objc" module="j2objc-annotations" name="*" type="*" ext="*" conf="" matcher="exact"/>
+			<exclude org="org.codehaus.mojo" module="animal-sniffer-annotations" name="*" type="*" ext="*" conf="" matcher="exact"/>
+		</dependency>
+		<dependency org="com.google.code.findbugs" name="annotations" rev="3.0.1u2" force="true" conf="provided->compile(*),provided(*),runtime(*),master(compile)">
+			<exclude org="com.google.code.findbugs" module="jsr305" name="*" type="*" ext="*" conf="" matcher="exact"/>
+			<exclude org="net.jcip" module="jcip-annotations" name="*" type="*" ext="*" conf="" matcher="exact"/>
+		</dependency>
+	</dependencies>
+</ivy-module>

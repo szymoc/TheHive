@@ -1,0 +1,40 @@
+---
+kind: pipeline
+name: default
+type: docker
+
+steps:
+  # Restore cache of downloaded dependencies
+  - name: restore-cache
+    image: drillster/drone-volume-cache
+    settings:
+      restore: true
+      backend: "filesystem"
+      mount:
+        - .sbt
+        - .ivy2
+        - .cache
+    volumes: [{name: cache, path: /cache}]
+
+  # Run project tests
+  - name: run-tests
+    image: thehiveproject/drone-scala-node
+    commands:
+      - sbt -Duser.home=$PWD test:compile test
+
+  # Save external libraries in cache
+  - name: save-cache
+    image: drillster/drone-volume-cache
+    settings:
+      rebuild: true
+      backend: "filesystem"
+      mount:
+        - .sbt
+        - .ivy2
+        - .cache
+    volumes: [{name: cache, path: /cache}]
+
+volumes:
+  - name: cache
+    host:
+      path: /opt/drone/cache

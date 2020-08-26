@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven" xmlns:e="http://ant.apache.org/ivy/extra">
+	<info organisation="net.lingala.zip4j"
+		module="zip4j"
+		revision="2.3.1"
+		status="release"
+		publication="20200126210056"
+	>
+		<license name="Apache License, Version 2.0" url="https://www.apache.org/licenses/LICENSE-2.0.txt" />
+		<description homepage="https://github.com/srikanth-lingala/zip4j">
+		Zip4j - A Java library for zip files and streams
+		</description>
+		<m:properties__assertj.version>3.12.2</m:properties__assertj.version>
+		<m:properties__mockito.version>2.28.2</m:properties__mockito.version>
+		<m:properties__powermock.version>2.0.2</m:properties__powermock.version>
+		<e:sbtTransformHash>932878800abb6a66396993c3237700a625649e7d</e:sbtTransformHash>
+		<m:properties__lombok.version>1.18.8</m:properties__lombok.version>
+		<m:properties__maven.compiler.target>1.8</m:properties__maven.compiler.target>
+		<m:properties__project.build.sourceEncoding>UTF-8</m:properties__project.build.sourceEncoding>
+		<m:properties__junit.version>4.12</m:properties__junit.version>
+		<m:maven.plugins>org.apache.maven.plugins__maven-failsafe-plugin__3.0.0-M3|org.apache.maven.plugins__maven-source-plugin__2.2.1|org.apache.maven.plugins__maven-javadoc-plugin__2.9.1|org.apache.maven.plugins__maven-gpg-plugin__1.5|org.sonatype.plugins__nexus-staging-maven-plugin__1.6.8|org.apache.felix__maven-bundle-plugin__null</m:maven.plugins>
+		<m:properties__maven.compiler.source>1.8</m:properties__maven.compiler.source>
+	</info>
+	<configurations>
+		<conf name="default" visibility="public" description="runtime dependencies and master artifact can be used with this conf" extends="runtime,master"/>
+		<conf name="master" visibility="public" description="contains only the artifact published by this module itself, with no transitive dependencies"/>
+		<conf name="compile" visibility="public" description="this is the default scope, used if none is specified. Compile dependencies are available in all classpaths."/>
+		<conf name="provided" visibility="public" description="this is much like compile, but indicates you expect the JDK or a container to provide it. It is only available on the compilation classpath, and is not transitive."/>
+		<conf name="runtime" visibility="public" description="this scope indicates that the dependency is not required for compilation, but is for execution. It is in the runtime and test classpaths, but not the compile classpath." extends="compile"/>
+		<conf name="test" visibility="private" description="this scope indicates that the dependency is not required for normal use of the application, and is only available for the test compilation and execution phases." extends="runtime"/>
+		<conf name="system" visibility="public" description="this scope is similar to provided except that you have to provide the JAR which contains it explicitly. The artifact is always available and is not looked up in a repository."/>
+		<conf name="sources" visibility="public" description="this configuration contains the source artifact of this module, if any."/>
+		<conf name="javadoc" visibility="public" description="this configuration contains the javadoc artifact of this module, if any."/>
+		<conf name="optional" visibility="public" description="contains all optional dependencies"/>
+	</configurations>
+	<publications>
+		<artifact name="zip4j" type="jar" ext="jar" conf="master"/>
+	</publications>
+	<dependencies>
+		<dependency org="junit" name="junit" rev="4.12" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.assertj" name="assertj-core" rev="3.12.2" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.mockito" name="mockito-core" rev="2.28.2" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.powermock" name="powermock-module-junit4" rev="2.0.2" force="true" conf="test->runtime(*),master(compile)"/>
+		<dependency org="org.powermock" name="powermock-api-mockito2" rev="2.0.2" force="true" conf="test->runtime(*),master(compile)"/>
+	</dependencies>
+</ivy-module>
